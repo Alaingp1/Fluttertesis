@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "775834008848",
+    "project_id": "lefufudb",
+    "storage_bucket": "lefufudb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:775834008848:android:020dc7d2804f74275af995",
+        "android_client_info": {
+          "package_name": "com.example.flutter_tesisv2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "775834008848-g88qac9dtcbaf0gbdr9racivv92vc43q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlFrt-QNgUeQrzhqSae4kg_O4iVAAm0p8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "775834008848-g88qac9dtcbaf0gbdr9racivv92vc43q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

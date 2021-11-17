@@ -1,0 +1,114 @@
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_tesisv2/src/productos/acciones/ordenar_producto.dart';
+import 'package:flutter_tesisv2/src/usuarios/sidebar.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
+
+class DetallesProducto extends StatefulWidget {
+  static const String ROUTE = "/detallesproducto";
+  final int index;
+
+  final List lista;
+
+  DetallesProducto({this.index, this.lista});
+
+  @override
+  _DetallesProductoState createState() => _DetallesProductoState();
+}
+
+class _DetallesProductoState extends State<DetallesProducto> {
+  final foto = ImagePicker();
+  File fotoi;
+  @override
+  Widget build(BuildContext context) {
+    var imagenprod = widget.lista[widget.index]['Producto_foto'];
+    return Scaffold(
+      drawer: NavDrawer(),
+      appBar: AppBar(),
+      body: Container(
+        padding: EdgeInsets.all(10.0),
+        child: ListView(
+          children: <Widget>[
+            SizedBox(
+              height: 15,
+            ),
+            Text(
+              widget.lista[widget.index]['Producto_nombre'],
+              style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Container(
+              width: 250,
+              height: 250,
+              child: widget.lista[widget.index]['Producto_foto'] != null
+                  ? FadeInImage(
+                      image: NetworkImage(
+                          "http://192.168.1.81/lefufuapp/public/uploads/kits/$imagenprod"),
+                      placeholder: AssetImage('assets/jar-loading.gif'),
+                      height: 500,
+                    )
+                  : Image.asset(
+                      "assets/no-image.png",
+                      fit: BoxFit.fill,
+                    ),
+            ),
+            SizedBox(
+              height: 25,
+            ),
+            Text(
+              widget.lista[widget.index]['Categoria_nombre'],
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontSize: 15),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(
+              height: 25.0,
+            ),
+            Text(
+              "Stock:   " + widget.lista[widget.index]['Producto_stock'],
+              style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(
+              height: 25,
+            ),
+            Text(
+              "Precio:  \$ " + widget.lista[widget.index]['Producto_precio'],
+              style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Text(
+              "Descripcion:   " +
+                  widget.lista[widget.index]['Producto_descripcion'],
+              style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            FlatButton(
+              child: Text(
+                'Ordenar Producto',
+                style: TextStyle(fontSize: 15.0),
+              ),
+              color: Colors.purple,
+              textColor: Colors.white,
+              onPressed: () => Navigator.pushNamed(context, "ordenarproducto",
+                  arguments: widget.lista[widget.index]['Producto_id']),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
