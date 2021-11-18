@@ -84,7 +84,8 @@ class _NavDrawerState extends State<NavDrawer> {
                                     dataUsuario[0]['Usuario_foto']),
                                 placeholder:
                                     AssetImage('assets/jar-loading.gif'),
-                                fit: BoxFit.fill)
+                                fit: BoxFit.fill,
+                              )
                             : Image.asset(
                                 "assets/no-image.png",
                                 fit: BoxFit.fill,

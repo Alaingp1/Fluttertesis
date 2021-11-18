@@ -18,18 +18,6 @@ class _PlacaState extends State<Placa> {
       body: ListView(
         children: [
           TextFormField(
-            controller: wifinombre,
-            decoration:
-                InputDecoration(labelText: 'Ingrese el nombre de su Wifi'),
-            textInputAction: TextInputAction.next,
-          ),
-          TextFormField(
-            controller: wificontrasena,
-            decoration:
-                InputDecoration(labelText: 'Ingrese su contraseña Wifi'),
-            textInputAction: TextInputAction.next,
-          ),
-          TextFormField(
             controller: macPlaca,
             decoration:
                 InputDecoration(labelText: 'Ingrese la MAC de su placa'),

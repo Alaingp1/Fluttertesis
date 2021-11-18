@@ -94,7 +94,7 @@ class _TemperaturaState extends State<Temperatura> {
           labelText: 'temperatura maxima',
           suffixText: 'c°',
         ),
-        onFieldSubmitted: (value) {
+        onSaved: (value) {
           value = maxima.text;
           sensor.temperaturaMaxima = int.parse(value);
           node.nextFocus();

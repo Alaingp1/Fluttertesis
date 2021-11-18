@@ -26,7 +26,14 @@ class _DetallesProductoState extends State<DetallesProducto> {
     var imagenprod = widget.lista[widget.index]['Producto_foto'];
     return Scaffold(
       drawer: NavDrawer(),
-      appBar: AppBar(),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pushNamed("productos");
+          },
+        ),
+      ),
       body: Container(
         padding: EdgeInsets.all(10.0),
         child: ListView(

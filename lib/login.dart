@@ -46,7 +46,7 @@ class _LoginState extends State<Login> {
         await FlutterSession().set('id', int.parse(data['Usuario_id']));
       }
 
-      if (data['Rol_id'] == "1") {
+      if (data['Rol_id'] == "3") {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => Trabajador()));
         _correo.clear();

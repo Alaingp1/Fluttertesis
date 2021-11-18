@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_session/flutter_session.dart';
 import 'package:flutter_tesisv2/src/cultivos/acciones/conectar_placa.dart';
 import 'package:flutter_tesisv2/src/cultivos/acciones/editar_cultivo.dart';
 import 'package:flutter_tesisv2/src/cultivos/cultivos.dart';
@@ -23,6 +24,19 @@ class DetalleCultivo extends StatefulWidget {
 class _DetalleCultivoState extends State<DetalleCultivo> {
   bool verificarsi = false;
   bool verificado = true;
+  int datasensor = 0;
+  @override
+  void initState() {
+    obtenerSensores().then((value) {
+      if (value.length >= 1) {
+        datasensor = int.parse(value[0]['Sensores_id']);
+        setState(() {});
+      }
+    });
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,8 +108,8 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
                         Text("adquiriste nuestro producto(?)"),
                         ElevatedButton(
                             onPressed: () {
-                              verificarsi = true;
-                              verificado = false;
+                              /*  verificarsi = true;
+                              verificado = false; */
                               setState(() {});
                               Navigator.of(context).push(
                                 MaterialPageRoute(
@@ -103,59 +117,54 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
                                 ),
                               );
                             },
-                            child: Text("si")),
-                        ElevatedButton(
-                            onPressed: () {
-                              verificarsi = false;
-                              verificado = false;
-                              setState(() {});
-                            },
-                            child: Text("no")),
+                            child: Text("vincular")),
                       ],
                     ),
                   ),
                   visible: verificado),
-              Visibility(
-                child: Container(
-                  child: ListBody(
-                    children: [
-                      Divider(),
-                      ListTile(
-                        leading: Icon(FontAwesomeIcons.thermometerQuarter),
-                        title: Text('Sensor de temperatura'),
-                        subtitle: Text('28ºC'),
-                        trailing: Switch(
-                          onChanged: (value) => print('toggle sensor'),
-                          activeColor: Colors.green,
-                          value: true,
-                        ),
-                        onTap: () => Navigator.pushNamed(context, "temperatura",
-                            arguments: widget.listaCult[widget.indexCult]
-                                ['Cultivo_id']),
-                      ),
-                      ListTile(
-                        leading: Icon(FontAwesomeIcons.tint),
-                        title: Text('Sensor de humedad'),
-                        subtitle: Text('45%'),
-                        trailing: Switch(
-                          onChanged: (value) => print('toggle sensor'),
-                          activeColor: Colors.green,
-                          value: true,
-                        ),
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Sensor(
-                              nombre: 'humedad',
+              datasensor != 0
+                  ? Container(
+                      child: ListBody(
+                        children: [
+                          Divider(),
+                          ListTile(
+                            leading: Icon(FontAwesomeIcons.thermometerQuarter),
+                            title: Text('Sensor de temperatura'),
+                            subtitle: Text('28ºC'),
+                            trailing: Switch(
+                              onChanged: (value) => print('toggle sensor'),
+                              activeColor: Colors.green,
+                              value: true,
+                            ),
+                            onTap: () => Navigator.pushNamed(
+                                context, "temperatura",
+                                arguments: widget.listaCult[widget.indexCult]
+                                    ['Cultivo_id']),
+                          ),
+                          ListTile(
+                            leading: Icon(FontAwesomeIcons.tint),
+                            title: Text('Sensor de humedad'),
+                            subtitle: Text('45%'),
+                            trailing: Switch(
+                              onChanged: (value) => print('toggle sensor'),
+                              activeColor: Colors.green,
+                              value: true,
+                            ),
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Sensor(
+                                  nombre: 'humedad',
+                                ),
+                              ),
                             ),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-                visible: verificarsi,
-              ),
+                    )
+                  : Container(
+                      color: Colors.amber,
+                    )
             ],
           ),
         ),
@@ -167,6 +176,15 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
     String cultivoid = widget.listaCult[widget.indexCult]['Cultivo_id'];
     var url =
         'http://192.168.1.81/pruebastesis/EliminarCultivo.php?Cultivo_id=$cultivoid';
+    var response = await http.get(Uri.parse(url));
+    return jsonDecode(response.body);
+  }
+
+  obtenerSensores() async {
+    var id = await FlutterSession().get('id');
+    String cultivoid = widget.listaCult[widget.indexCult]['Cultivo_id'];
+    var url =
+        'http://192.168.1.81/pruebastesis/obtenerSensores.php?Usuario_id=$id&Cultivo_id=$cultivoid';
     var response = await http.get(Uri.parse(url));
     return jsonDecode(response.body);
   }

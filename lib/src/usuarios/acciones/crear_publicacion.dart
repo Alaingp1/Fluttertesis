@@ -152,7 +152,10 @@ class _PublicacionState extends State<Publicacion> {
         height: 250,
         width: 250,
         child: dataCult != null
-            ? Image.network(dataCult['Cultivo_imagen'])
+            ? FadeInImage(
+                image: NetworkImage(dataCult['Cultivo_imagen']),
+                placeholder: AssetImage('assets/jar-loading.gif'),
+              )
             : Image.asset("assets/no-image.png"),
       );
     } else {

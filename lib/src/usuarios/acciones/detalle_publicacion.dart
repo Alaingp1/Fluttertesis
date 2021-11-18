@@ -28,7 +28,7 @@ class _DetallePublicacionState extends State<DetallePublicacion> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.of(context).pushNamed("cultivos");
+            Navigator.of(context).pushNamed("listapub");
           },
         ),
         actions: [
