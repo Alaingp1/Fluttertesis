@@ -165,7 +165,19 @@ class _EditarUsuarioState extends State<EditarUsuario> {
                                 msg:
                                     "por favor verifique si su contraseña es igual o cumple con los requisitos");
                           }
-                        } else {
+                        } else if (urlIma != null) {
+                          if (contrasenaController.text ==
+                              confirmarController.text) {
+                            await editarUsuario();
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Cuenta()));
+                          } else {
+                            Fluttertoast.showToast(
+                                msg:
+                                    "por favor verifique si su contraseña es igual o cumple con los requisitos");
+                          }
                           Fluttertoast.showToast(
                               msg:
                                   "por favor seleccione una imagen u espere un momento para que se suba");

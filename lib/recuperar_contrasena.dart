@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
+import 'home.dart';
+import 'login.dart';
+
 class RecuperarContrasena extends StatefulWidget {
   static const String ROUTE = "/recuperarcontrasena";
   @override
@@ -89,7 +92,14 @@ class _RecuperarContrasenaState extends State<RecuperarContrasena> {
                         ),
                       ),
                       ElevatedButton(
-                          onPressed: () {}, child: Text("cambiar contraseña"))
+                          onPressed: () {
+                            editarUsuario();
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Login()));
+                          },
+                          child: Text("cambiar contraseña"))
                     ],
                   ),
                 ),
