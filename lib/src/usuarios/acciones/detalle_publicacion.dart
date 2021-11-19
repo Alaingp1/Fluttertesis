@@ -32,7 +32,7 @@ class _DetallePublicacionState extends State<DetallePublicacion> {
             icon: Icon(Icons.delete),
             onPressed: () async {
               var url =
-                  "http://192.168.1.81/pruebastesis/eliminarPublicacion.php";
+                  "http://152.173.193.119/pruebastesis/eliminarPublicacion.php";
               await http.post(Uri.parse(url), body: {
                 "Publicacion_id": widget.listaPub[widget.indexPub]
                     ['Publicacion_id']

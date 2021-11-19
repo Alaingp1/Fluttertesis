@@ -129,7 +129,7 @@ class _CuentaState extends State<Cuenta> {
   Future<List> verUsuario() async {
     var id = await FlutterSession().get('id');
     var url =
-        "http://192.168.1.81/pruebastesis/obtenerUsuario.php?Usuario_id=$id";
+        "http://152.173.193.119/pruebastesis/obtenerUsuario.php?Usuario_id=$id";
     final response = await http.get(Uri.parse(url));
     final dataUsuario = jsonDecode(response.body);
     return dataUsuario;
