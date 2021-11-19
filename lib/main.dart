@@ -5,9 +5,11 @@ import 'package:flutter_tesisv2/login.dart';
 import 'package:flutter_tesisv2/recuperar_contrasena.dart';
 import 'package:flutter_tesisv2/src/cultivos/acciones/editar_cultivo.dart';
 import 'package:flutter_tesisv2/src/cultivos/cultivos.dart';
-import 'package:flutter_tesisv2/src/cultivos/sensores/temperatura.dart';
+import 'package:flutter_tesisv2/src/cultivos/sensores/Sensores.dart';
 import 'package:flutter_tesisv2/src/empresa/contacto.dart';
 import 'package:flutter_tesisv2/src/empresa/datos_empresa.dart';
+import 'package:flutter_tesisv2/src/usuarios/ListadoOrdenes.dart';
+import 'package:flutter_tesisv2/src/usuarios/acciones/orden_detalle.dart';
 import 'package:flutter_tesisv2/src/productos/acciones/detalle_producto.dart';
 import 'package:flutter_tesisv2/src/productos/acciones/ordenar_producto.dart';
 import 'package:flutter_tesisv2/src/productos/productos.dart';
@@ -87,12 +89,16 @@ class MyApp extends StatelessWidget {
         Publicacion.ROUTE: (_) => Publicacion(),
         "recuperarcontrasena": (BuildContext context) => RecuperarContrasena(),
         RecuperarContrasena.ROUTE: (_) => RecuperarContrasena(),
-        "temperatura": (BuildContext context) => Temperatura(),
-        Temperatura.ROUTE: (_) => Temperatura(),
+        "Sensores": (BuildContext context) => Sensores(),
+        Sensores.ROUTE: (_) => Sensores(),
         "alertas": (BuildContext context) => Alertas(),
         Alertas.ROUTE: (_) => Alertas(),
         "listapub": (BuildContext context) => ListaPublicaciones(),
         ListaPublicaciones.ROUTE: (_) => ListaPublicaciones(),
+        "listadoOrdenes": (BuildContext context) => ListadoOrdenes(),
+        ListadoOrdenes.ROUTE: (_) => ListadoOrdenes(),
+        "ordenDetalle": (BuildContext context) => OrdenDetalle(),
+        OrdenDetalle.ROUTE: (_) => OrdenDetalle(),
       },
     );
   }

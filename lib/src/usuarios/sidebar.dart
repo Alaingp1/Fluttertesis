@@ -7,6 +7,7 @@ import 'package:flutter_tesisv2/home.dart';
 import 'package:flutter_tesisv2/login.dart';
 import 'package:flutter_tesisv2/src/empresa/contacto.dart';
 import 'package:flutter_tesisv2/src/empresa/datos_empresa.dart';
+import 'package:flutter_tesisv2/src/usuarios/ListadoOrdenes.dart';
 import 'package:flutter_tesisv2/src/productos/productos.dart';
 import 'package:flutter_tesisv2/src/usuarios/usuarios.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -39,36 +40,6 @@ class _NavDrawerState extends State<NavDrawer> {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          /* UserAccountsDrawerHeader(
-            currentAccountPicture: CircleAvatar(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    child: GestureDetector(
-                      child: ClipOval(
-                        child: dataUsuario[0]['Usuario_foto'] != null
-                            ? FadeInImage(
-                                image: NetworkImage(
-                                    dataUsuario[0]['Usuario_foto']),
-                                placeholder:
-                                    AssetImage('assets/jar-loading.gif'),
-                                height: 500,
-                              )
-                            : Image.asset(
-                                "assets/no-image.png",
-                                fit: BoxFit.fill,
-                              ),
-                      ),
-                      onTap: () {
-                        Navigator.pushNamed(context, Cuenta.ROUTE);
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ), */
           DrawerHeader(
             child: GestureDetector(
               child: Stack(
@@ -101,10 +72,6 @@ class _NavDrawerState extends State<NavDrawer> {
               ),
               onTap: () => {Navigator.pushNamed(context, Cuenta.ROUTE)},
             ),
-            /* ListTile(
-              title: Text('Perfil'),
-              onTap: () => {Navigator.pushNamed(context, Cuenta.ROUTE)},
-            ), */
           ),
           SizedBox(
             height: 10.0,
@@ -121,6 +88,14 @@ class _NavDrawerState extends State<NavDrawer> {
             leading: FaIcon(FontAwesomeIcons.box),
             title: Text('Productos'),
             onTap: () => {Navigator.pushNamed(context, Productos.ROUTE)},
+          ),
+          SizedBox(
+            height: 40.0,
+          ),
+          ListTile(
+            leading: FaIcon(FontAwesomeIcons.list),
+            title: Text('Ordenes'),
+            onTap: () => {Navigator.pushNamed(context, ListadoOrdenes.ROUTE)},
           ),
           SizedBox(
             height: 40.0,

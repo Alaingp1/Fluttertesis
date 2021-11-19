@@ -5,7 +5,7 @@ import 'package:flutter_session/flutter_session.dart';
 import 'package:flutter_tesisv2/src/cultivos/acciones/conectar_placa.dart';
 import 'package:flutter_tesisv2/src/cultivos/acciones/editar_cultivo.dart';
 import 'package:flutter_tesisv2/src/cultivos/cultivos.dart';
-import 'package:flutter_tesisv2/src/cultivos/sensor.dart';
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 
@@ -129,7 +129,7 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
                           Divider(),
                           ListTile(
                             leading: Icon(FontAwesomeIcons.thermometerQuarter),
-                            title: Text('Sensor de temperatura'),
+                            title: Text('Sensor de Sensores'),
                             subtitle: Text('28ºC'),
                             trailing: Switch(
                               onChanged: (value) => print('toggle sensor'),
@@ -137,7 +137,7 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
                               value: true,
                             ),
                             onTap: () => Navigator.pushNamed(
-                                context, "temperatura",
+                                context, "Sensores",
                                 arguments: widget.listaCult[widget.indexCult]
                                     ['Cultivo_id']),
                           ),
@@ -149,14 +149,6 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
                               onChanged: (value) => print('toggle sensor'),
                               activeColor: Colors.green,
                               value: true,
-                            ),
-                            onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Sensor(
-                                  nombre: 'humedad',
-                                ),
-                              ),
                             ),
                           ),
                         ],

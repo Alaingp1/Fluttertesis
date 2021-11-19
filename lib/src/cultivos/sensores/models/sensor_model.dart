@@ -12,30 +12,30 @@ String sensorModelToJson(SensorModel data) => json.encode(data.toJson());
 class SensorModel {
   SensorModel({
     this.id,
-    this.temperaturaMaxima,
-    this.temperaturaMinima,
+    this.SensoresMaxima,
+    this.SensoresMinima,
     this.humedad,
     this.estado,
   });
 
   int id;
-  int temperaturaMaxima;
-  int temperaturaMinima;
+  int SensoresMaxima;
+  int SensoresMinima;
   int humedad;
   bool estado;
 
   factory SensorModel.fromJson(Map<String, dynamic> json) => SensorModel(
         id: json["id"],
-        temperaturaMaxima: json["Temperatura_maxima"],
-        temperaturaMinima: json["Temperatura_minima"],
+        SensoresMaxima: json["Sensores_maxima"],
+        SensoresMinima: json["Sensores_minima"],
         humedad: json["Humedad"],
         estado: json["estado"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "Temperatura_maxima": temperaturaMaxima,
-        "Temperatura_minima": temperaturaMinima,
+        "Sensores_maxima": SensoresMaxima,
+        "Sensores_minima": SensoresMinima,
         "Humedad": humedad,
         "estado": estado,
       };

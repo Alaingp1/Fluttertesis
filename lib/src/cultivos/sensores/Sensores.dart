@@ -3,15 +3,15 @@ import 'package:flutter_tesisv2/src/cultivos/sensores/models/sensor_model.dart';
 import 'package:flutter_tesisv2/src/cultivos/sensores/providers/sensor_provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class Temperatura extends StatefulWidget {
-  static const String ROUTE = "/temperatura";
-  Temperatura({Key key}) : super(key: key);
+class Sensores extends StatefulWidget {
+  static const String ROUTE = "/Sensores";
+  Sensores({Key key}) : super(key: key);
 
   @override
-  _TemperaturaState createState() => _TemperaturaState();
+  _SensoresState createState() => _SensoresState();
 }
 
-class _TemperaturaState extends State<Temperatura> {
+class _SensoresState extends State<Sensores> {
   SensorModel sensor = SensorModel();
   final sensorProvider = SensorProvider();
   TextEditingController minima = TextEditingController();
@@ -32,7 +32,7 @@ class _TemperaturaState extends State<Temperatura> {
                   FontAwesomeIcons.image,
                   size: 60,
                 ),
-                Text('Sensor de temperatura')
+                Text('Sensor de Sensores')
               ],
             ),
             Row(
@@ -69,12 +69,12 @@ class _TemperaturaState extends State<Temperatura> {
       child: TextFormField(
         controller: minima,
         decoration: InputDecoration(
-          labelText: 'temperatura minima',
+          labelText: 'Sensores minima',
           suffixText: 'c°',
         ),
         onFieldSubmitted: (value) {
           value = minima.text;
-          sensor.temperaturaMinima = int.parse(value);
+          sensor.SensoresMinima = int.parse(value);
           node.nextFocus();
         },
         enabled: true,
@@ -91,12 +91,12 @@ class _TemperaturaState extends State<Temperatura> {
       child: TextFormField(
         controller: maxima,
         decoration: InputDecoration(
-          labelText: 'temperatura maxima',
+          labelText: 'Sensores maxima',
           suffixText: 'c°',
         ),
         onSaved: (value) {
           value = maxima.text;
-          sensor.temperaturaMaxima = int.parse(value);
+          sensor.SensoresMaxima = int.parse(value);
           node.nextFocus();
         },
         enabled: true,
@@ -130,8 +130,8 @@ class _TemperaturaState extends State<Temperatura> {
     print("minima  " + minima.text);
     print("maxima  " + maxima.text);
     print("humedad " + humedad.text);
-    print("minima  " + sensor.temperaturaMinima.toString());
-    print("maxima  " + sensor.temperaturaMaxima.toString());
+    print("minima  " + sensor.SensoresMinima.toString());
+    print("maxima  " + sensor.SensoresMaxima.toString());
     print("humedad " + sensor.humedad.toString());
 
     sensorProvider.asignarDatos(sensor);

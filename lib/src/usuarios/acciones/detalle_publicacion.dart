@@ -1,11 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_tesisv2/src/cultivos/acciones/editar_cultivo.dart';
-import 'package:flutter_tesisv2/src/cultivos/cultivos.dart';
-import 'package:flutter_tesisv2/src/cultivos/sensor.dart';
+
 import 'package:flutter_tesisv2/src/usuarios/acciones/listar_publicaciones.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'package:http/http.dart' as http;
 
 class DetallePublicacion extends StatefulWidget {

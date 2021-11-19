@@ -30,7 +30,7 @@ class _AlertasState extends State<Alertas> {
           ),
           ListTile(
             leading: const Icon(FontAwesomeIcons.compressArrowsAlt),
-            title: const Text('Notificar temperatura extrema'),
+            title: const Text('Notificar Sensores extrema'),
             trailing: Switch(
               onChanged: (value) => print('toggle notification'),
               activeColor: Colors.green,
