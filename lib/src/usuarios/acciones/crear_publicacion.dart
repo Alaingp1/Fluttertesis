@@ -91,7 +91,9 @@ class _PublicacionState extends State<Publicacion> {
               TextFormField(
                 controller: nombrepController,
                 decoration: InputDecoration(
-                  labelText: dataCult['Cultivo_apodo'],
+                  labelText: dataCult != null
+                      ? dataCult['Cultivo_apodo']
+                      : "ingrese un nombre",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(
                       Radius.circular(10),

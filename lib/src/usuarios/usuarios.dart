@@ -43,10 +43,6 @@ class _CuentaState extends State<Cuenta> {
             icon: Icon(Icons.edit),
             onPressed: () => Navigator.of(context).pushNamed("editarusuario"),
           ),
-          IconButton(
-            icon: Icon(Icons.shopping_cart),
-            onPressed: () => Navigator.of(context).pushNamed("ordenes"),
-          ),
         ],
       ),
       body: ListView.builder(

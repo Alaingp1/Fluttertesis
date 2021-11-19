@@ -82,12 +82,19 @@ class _EditarCultivoState extends State<EditarCultivo> {
                   margin: EdgeInsets.all(10),
                   width: 300.0,
                   height: 300.0,
-                  child: fotoi != null
-                      ? Image.file(fotoi)
-                      : Image.asset(
-                          "assets/no-image.png",
-                          fit: BoxFit.fill,
-                        ),
+                  child: dataCult[index]['Cultivo_imagen'] != null &&
+                          fotoi == null
+                      ? FadeInImage(
+                          image:
+                              NetworkImage(dataCult[index]['Cultivo_imagen']),
+                          placeholder: AssetImage('assets/jar-loading.gif'),
+                        )
+                      : fotoi != null
+                          ? Image.file(fotoi)
+                          : Image.asset(
+                              "assets/no-image.png",
+                              fit: BoxFit.fill,
+                            ),
                 ),
                 Text(
                   "Nombre del Cultivo",
@@ -104,7 +111,9 @@ class _EditarCultivoState extends State<EditarCultivo> {
                   ),
                 ),
                 DropdownButton<String>(
-                  hint: Text("ingrese un tipo de cultivo"),
+                  hint: dataCult != null
+                      ? Text(dataCult[index]['Tipo_nombre'])
+                      : Text("ingrese un tipo de cultivo"),
                   value: dropdownValue,
                   underline: Container(
                     height: MediaQuery.of(context).size.height,
@@ -126,27 +135,19 @@ class _EditarCultivoState extends State<EditarCultivo> {
                     },
                   ).toList(),
                 ),
-                Container(
-                  child: Text(
-                    dataCult[index]['Tipo_id'],
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.white),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
                 ElevatedButton(
-                  onPressed: () {
-                    editarCultivo();
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Cultivo()));
+                  onPressed: () async {
+                    if (fotoi != null && urlIma != null) {
+                      await editarCultivo();
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Cultivo()));
+                    } else {
+                      Fluttertoast.showToast(
+                          msg:
+                              "por favor seleccione una imagen u espere un momento para que se suba");
+                    }
                   },
                   child: Text("Editar"),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    editarCultivo();
-                  },
-                  child: Text("prueba"),
                 ),
               ],
             ),

@@ -84,15 +84,25 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    widget.listaCult[widget.indexCult]['Cultivo_apodo'],
+                    "Nombre del Cultivo:   " +
+                        widget.listaCult[widget.indexCult]['Cultivo_apodo'],
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white),
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    "Tipo del Cultivo:   " +
+                        widget.listaCult[widget.indexCult]['Tipo_nombre'],
                     style: TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.white),
                     textAlign: TextAlign.center,
                   ),
                 ],
               ),
+              Divider(),
               Container(
                   height: 250,
+                  width: 250,
                   child: FadeInImage(
                     image: NetworkImage(
                         widget.listaCult[widget.indexCult]['Cultivo_imagen']),

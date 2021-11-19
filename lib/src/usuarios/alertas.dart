@@ -19,24 +19,13 @@ class _AlertasState extends State<Alertas> {
         shrinkWrap: true,
         physics: PageScrollPhysics(),
         children: [
-          ListTile(
-            leading: const Icon(FontAwesomeIcons.landmark),
-            title: const Text('Notificar falta de agua'),
-            trailing: Switch(
-              onChanged: (value) => print('toggle notification'),
-              activeColor: Colors.green,
-              value: true,
+          Card(
+            color: Colors.purple[800],
+            child: Container(
+              height: 50,
+              child: Center(child: Text("te has registrado")),
             ),
-          ),
-          ListTile(
-            leading: const Icon(FontAwesomeIcons.compressArrowsAlt),
-            title: const Text('Notificar Sensores extrema'),
-            trailing: Switch(
-              onChanged: (value) => print('toggle notification'),
-              activeColor: Colors.green,
-              value: true,
-            ),
-          ),
+          )
         ],
       ),
       bottomNavigationBar: ClienteBottomBar('alertas'),

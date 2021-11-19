@@ -50,13 +50,18 @@ class _NavDrawerState extends State<NavDrawer> {
                       radius: 40,
                       child: ClipOval(
                         child: dataUsuario.length >= 1
-                            ? FadeInImage(
-                                image: NetworkImage(
-                                    dataUsuario[0]['Usuario_foto']),
-                                placeholder:
-                                    AssetImage('assets/jar-loading.gif'),
-                                fit: BoxFit.fill,
-                              )
+                            ? dataUsuario[0]['Usuario_foto'] != null
+                                ? FadeInImage(
+                                    image: NetworkImage(
+                                        dataUsuario[0]['Usuario_foto']),
+                                    placeholder:
+                                        AssetImage('assets/jar-loading.gif'),
+                                    fit: BoxFit.fill,
+                                  )
+                                : Image.asset(
+                                    "assets/no-image.png",
+                                    fit: BoxFit.fill,
+                                  )
                             : Image.asset(
                                 "assets/no-image.png",
                                 fit: BoxFit.fill,

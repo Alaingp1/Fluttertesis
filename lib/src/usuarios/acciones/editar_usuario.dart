@@ -82,14 +82,26 @@ class _EditarUsuarioState extends State<EditarUsuario> {
                   Container(
                     width: 150,
                     height: 150,
-                    child: fotoi == null && urlIma == null
-                        ? FadeInImage(
-                            image: NetworkImage(
-                                dataUsuario[index]['Usuario_foto']),
+                    child: urlIma == null
+                        ? fotoi == null
+                            ? dataUsuario[index]['Usuario_foto'] != null
+                                ? FadeInImage(
+                                    image: NetworkImage(
+                                        dataUsuario[index]['Usuario_foto']),
+                                    placeholder:
+                                        AssetImage('assets/jar-loading.gif'),
+                                    height: 500,
+                                  )
+                                : Image.file(fotoi)
+                            : Image.asset(
+                                "assets/no-image.png",
+                                fit: BoxFit.fill,
+                              )
+                        : FadeInImage(
+                            image: NetworkImage(urlIma),
                             placeholder: AssetImage('assets/jar-loading.gif'),
                             height: 500,
-                          )
-                        : Image.file(fotoi),
+                          ),
                   ),
                   Container(
                     child: TextFormField(
@@ -140,17 +152,23 @@ class _EditarUsuarioState extends State<EditarUsuario> {
                   ),
                   ElevatedButton(
                       onPressed: () async {
-                        if (contrasenaController.text ==
-                            confirmarController.text) {
-                          await editarUsuario();
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Cuenta()));
+                        if (urlIma == null) {
+                          if (contrasenaController.text ==
+                              confirmarController.text) {
+                            await editarUsuario();
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Cuenta()));
+                          } else {
+                            Fluttertoast.showToast(
+                                msg:
+                                    "por favor verifique si su contraseña es igual o cumple con los requisitos");
+                          }
                         } else {
                           Fluttertoast.showToast(
                               msg:
-                                  "por favor verifique si su contraseña es igual o cumple con los requisitos");
+                                  "por favor seleccione una imagen u espere un momento para que se suba");
                         }
                       },
                       child: Text("Editar"))

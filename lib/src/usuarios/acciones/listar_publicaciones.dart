@@ -38,8 +38,13 @@ class _ListaPublicacionesState extends State<ListaPublicaciones> {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
-      drawer: NavDrawer(),
-      appBar: AppBar(),
+      appBar: AppBar(
+          leading: IconButton(
+        icon: Icon(Icons.arrow_back),
+        onPressed: () {
+          Navigator.of(context).pushNamed("home");
+        },
+      )),
       body: ListView.builder(
         itemCount: dataPub.length,
         itemBuilder: (contex, index) {

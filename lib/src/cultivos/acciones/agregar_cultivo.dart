@@ -114,7 +114,7 @@ class _AgregarCultivoState extends State<AgregarCultivo> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  if (fotoi != null || urlIma != null) {
+                  if (fotoi != null && urlIma != null) {
                     if (apodoController.text.isEmpty) {
                       Fluttertoast.showToast(
                           msg: "por favor ingrese un apodo para el cultivo");
