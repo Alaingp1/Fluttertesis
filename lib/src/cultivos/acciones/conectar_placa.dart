@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tesisv2/src/usuarios/sidebar.dart';
+import 'package:http/http.dart' as http;
 
 class Placa extends StatefulWidget {
-  static const String ROUTE = '/cultivos';
-
+  static const String ROUTE = '/conectarplaca';
   @override
   _PlacaState createState() => _PlacaState();
 }
@@ -27,11 +27,25 @@ class _PlacaState extends State<Placa> {
           ),
           ElevatedButton(
               onPressed: () {
-                Navigator.pop(context);
+                generarOrden();
               },
-              child: Text("aceptar"))
+              child: const Text("aceptar"))
         ],
       ),
+    );
+  }
+
+  void generarOrden() async {
+    var cultivo = ModalRoute.of(context).settings.arguments as String;
+    print('vinculando placa ${macPlaca.text} al cultivo $cultivo');
+    var url = "http://152.173.193.119/pruebastesis/agregarMac.php";
+    // final response = await http.get(Uri.parse(url));
+    await http.post(
+      Uri.parse(url),
+      body: {
+        "Cultivo_id": cultivo,
+        "Sensores_nombre": macPlaca.text,
+      },
     );
   }
 }

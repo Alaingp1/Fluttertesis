@@ -25,6 +25,8 @@ import 'package:flutter_tesisv2/src/usuarios/acciones/listar_publicaciones.dart'
 import 'package:flutter_tesisv2/src/usuarios/alertas.dart';
 import 'package:flutter_tesisv2/src/usuarios/usuarios.dart';
 
+import 'src/cultivos/acciones/conectar_placa.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -99,6 +101,8 @@ class MyApp extends StatelessWidget {
         ListadoOrdenes.ROUTE: (_) => ListadoOrdenes(),
         "ordenDetalle": (BuildContext context) => OrdenDetalle(),
         OrdenDetalle.ROUTE: (_) => OrdenDetalle(),
+        "conectarplaca": (BuildContext context) => Placa(),
+        Placa.ROUTE: (_) => Placa(),
       },
     );
   }
