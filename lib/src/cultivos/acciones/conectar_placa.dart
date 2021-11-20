@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tesisv2/src/usuarios/sidebar.dart';
 
 class Placa extends StatefulWidget {
+  static const String ROUTE = '/cultivos';
+
   @override
   _PlacaState createState() => _PlacaState();
 }
