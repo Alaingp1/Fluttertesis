@@ -66,17 +66,12 @@ class _SensoresState extends State<Sensores> {
     return Container(
       width: MediaQuery.of(context).size.width,
       padding: EdgeInsets.only(right: 60),
-      child: TextFormField(
+      child: TextField(
         controller: minima,
         decoration: InputDecoration(
           labelText: 'Sensores minima',
           suffixText: 'c°',
         ),
-        onFieldSubmitted: (value) {
-          value = minima.text;
-          sensor.SensoresMinima = int.parse(value);
-          node.nextFocus();
-        },
         enabled: true,
         keyboardType: TextInputType.number,
       ),
@@ -88,17 +83,12 @@ class _SensoresState extends State<Sensores> {
     return Container(
       width: MediaQuery.of(context).size.width,
       padding: EdgeInsets.only(right: 60),
-      child: TextFormField(
+      child: TextField(
         controller: maxima,
         decoration: InputDecoration(
           labelText: 'Sensores maxima',
           suffixText: 'c°',
         ),
-        onSaved: (value) {
-          value = maxima.text;
-          sensor.SensoresMaxima = int.parse(value);
-          node.nextFocus();
-        },
         enabled: true,
         keyboardType: TextInputType.number,
       ),
@@ -110,17 +100,12 @@ class _SensoresState extends State<Sensores> {
     return Container(
       width: MediaQuery.of(context).size.width,
       padding: EdgeInsets.only(right: 60),
-      child: TextFormField(
+      child: TextField(
         controller: humedad,
         decoration: InputDecoration(
           labelText: 'Humedad de la planta',
           suffixText: '%',
         ),
-        onFieldSubmitted: (value) {
-          value = humedad.text;
-          sensor.humedad = int.parse(value);
-          node.nextFocus();
-        },
         keyboardType: TextInputType.number,
       ),
     );
@@ -130,6 +115,9 @@ class _SensoresState extends State<Sensores> {
     print("minima  " + minima.text);
     print("maxima  " + maxima.text);
     print("humedad " + humedad.text);
+    sensor.SensoresMinima = int.parse(minima.text);
+    sensor.SensoresMaxima = int.parse(maxima.text);
+    sensor.humedad = int.parse(humedad.text);
     print("minima  " + sensor.SensoresMinima.toString());
     print("maxima  " + sensor.SensoresMaxima.toString());
     print("humedad " + sensor.humedad.toString());
