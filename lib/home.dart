@@ -61,14 +61,20 @@ class _HomeState extends State<Home> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        "Nombre publicacion : " +
-                            dataPub[index]['Publicacion_nombre'],
-                        style: TextStyle(fontSize: 16, color: Colors.white),
-                      ),
-                      Text(
-                        "Autor : " + dataPub[index]['Usuario_nombre'],
-                        style: TextStyle(fontSize: 16, color: Colors.white),
+                      Column(
+                        children: [
+                          Text(
+                            "Titulo : " + dataPub[index]['Publicacion_nombre'],
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Colors.white),
+                          ),
+                          Text(
+                            "Autor : " + dataPub[index]['Usuario_nombre'],
+                            style: TextStyle(fontSize: 16, color: Colors.white),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -86,16 +92,12 @@ class _HomeState extends State<Home> {
                           ),
                   ),
                   Divider(),
-                  Text(
-                    "Descripcion: ",
-                    style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
-                  Divider(),
                   Container(
                       child: Text(
                     dataPub[index]['Publicacion_descripcion'],
                     style: TextStyle(fontSize: 15, color: Colors.white),
                   )),
+                  Divider()
                 ],
               ),
             ),

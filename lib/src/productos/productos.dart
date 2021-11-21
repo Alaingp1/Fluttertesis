@@ -184,8 +184,7 @@ class _ProductosState extends State<Productos> {
                               height: 25.0,
                             ),
                             Text(
-                              "precio '\$'" +
-                                  dataProd[index]['Producto_precio'],
+                              "precio \$" + dataProd[index]['Producto_precio'],
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white),

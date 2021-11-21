@@ -71,7 +71,7 @@ class ElementoLista extends StatelessWidget {
             onTap: () => Navigator.pushNamed(context, "ordenDetalle",
                 arguments: lista[posicion]['Orden_id']),
             child: Card(
-              color: Colors.green,
+              color: Colors.purple[800],
               child: Container(
                 padding: EdgeInsets.all(10.0),
                 child: Column(

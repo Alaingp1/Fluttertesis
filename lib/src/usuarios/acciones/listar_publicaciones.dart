@@ -92,16 +92,12 @@ class _ListaPublicacionesState extends State<ListaPublicaciones> {
                             ),
                     ),
                     Divider(),
-                    Text(
-                      "Descripcion: ",
-                      style: TextStyle(fontSize: 20, color: Colors.white),
-                    ),
-                    Divider(),
                     Container(
                         child: Text(
                       dataPub[index]['Publicacion_descripcion'],
                       style: TextStyle(fontSize: 15, color: Colors.white),
                     )),
+                    Divider(),
                   ],
                 ),
               ),
