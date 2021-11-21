@@ -53,6 +53,11 @@ class _HomeState extends State<Home> {
       body: ListView.builder(
         itemCount: dataPub.length,
         itemBuilder: (contex, index) {
+          var imagen = dataPub[index]['Publicacion_imagen'];
+          Pattern urlima =
+              r"((https?:www\.)|(https?:\/\/)|(www\.))[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9]{1,6}(\/[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)?";
+          RegExp regExp = RegExp(urlima);
+
           return Container(
             child: Card(
               child: Column(
@@ -81,11 +86,19 @@ class _HomeState extends State<Home> {
                   Divider(),
                   Container(
                     child: dataPub[index]['Publicacion_imagen'] != null
-                        ? FadeInImage(
-                            image: NetworkImage(
-                                dataPub[index]['Publicacion_imagen']),
-                            placeholder: AssetImage('assets/jar-loading.gif'),
-                          )
+                        ? regExp.hasMatch(imagen)
+                            ? FadeInImage(
+                                image: NetworkImage(
+                                    dataPub[index]['Publicacion_imagen']),
+                                placeholder:
+                                    AssetImage('assets/jar-loading.gif'),
+                              )
+                            : FadeInImage(
+                                image: NetworkImage(
+                                    "http://152.173.193.119/lefufuapp/public/uploads/publicaciones/$imagen"),
+                                placeholder:
+                                    AssetImage('assets/jar-loading.gif'),
+                              )
                         : Image.asset(
                             "assets/no-image.png",
                             fit: BoxFit.fill,
