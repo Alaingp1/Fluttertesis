@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tesisv2/login.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:crypto/crypto.dart';
 
 class Registro extends StatefulWidget {
   static const String ROUTE = "/registrar";
