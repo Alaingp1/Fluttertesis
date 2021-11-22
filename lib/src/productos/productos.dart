@@ -39,13 +39,13 @@ class _ProductosState extends State<Productos> {
   }
 
   Future<List> verProductos() async {
-    var url = "http://152.173.193.119/pruebastesis/obtenerProducto.php";
+    var url = "http://192.168.1.81/pruebastesis/obtenerProducto.php";
     final response = await http.get(Uri.parse(url));
     return jsonDecode(response.body);
   }
 
   Future verCategoria() async {
-    var url = "http://152.173.193.119/pruebastesis/verCategorias.php";
+    var url = "http://192.168.1.81/pruebastesis/verCategorias.php";
     final response = await http.get(Uri.parse(url));
     final dataJson = jsonDecode(response.body);
     return dataJson;
@@ -53,7 +53,7 @@ class _ProductosState extends State<Productos> {
 
   Future<List> filtroCategoria() async {
     var url =
-        "http://152.173.193.119/pruebastesis/filtroCategorias.php?Categoria_id=$dropdownValue";
+        "http://192.168.1.81/pruebastesis/filtroCategorias.php?Categoria_id=$dropdownValue";
     final response = await http.get(Uri.parse(url));
     final dataFiltro = jsonDecode(response.body);
     return dataFiltro;
@@ -62,7 +62,7 @@ class _ProductosState extends State<Productos> {
   Future filtroNombre() async {
     f = filtron.text;
     var url =
-        "http://152.173.193.119/pruebastesis/filtroNombre.php?Producto_nombre=$f";
+        "http://192.168.1.81/pruebastesis/filtroNombre.php?Producto_nombre=$f";
     final response = await http.get(Uri.parse(url));
     return jsonDecode(response.body);
   }
@@ -163,7 +163,7 @@ class _ProductosState extends State<Productos> {
                                       dataProd[index]['Producto_foto'] == ""
                                   ? FadeInImage(
                                       image: NetworkImage(
-                                          "http://152.173.193.119/lefufuapp/public/uploads/kits/$imagenprod"),
+                                          "http://192.168.1.81/lefufuapp/public/uploads/kits/$imagenprod"),
                                       placeholder:
                                           AssetImage('assets/jar-loading.gif'),
                                       height: 500,

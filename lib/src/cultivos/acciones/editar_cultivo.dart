@@ -238,7 +238,7 @@ class _EditarCultivoState extends State<EditarCultivo> {
     var id = await FlutterSession().get('id');
     var cultivo = ModalRoute.of(context).settings.arguments as String;
     var url =
-        "http://152.173.193.119/pruebastesis/obtenerCultivoeditar.php?Usuario_id=$id&Cultivo_id=$cultivo";
+        "http://192.168.1.81/pruebastesis/obtenerCultivoeditar.php?Usuario_id=$id&Cultivo_id=$cultivo";
     final response = await http.get(Uri.parse(url));
     final dataProd = jsonDecode(response.body);
     return dataProd;
@@ -249,7 +249,7 @@ class _EditarCultivoState extends State<EditarCultivo> {
     var cultivo = ModalRoute.of(context).settings.arguments as String;
 
     var url =
-        "http://152.173.193.119/pruebastesis/editarCultivo.php?Cultivo_id=$cultivo&Tipo_id=$dropdownValue";
+        "http://192.168.1.81/pruebastesis/editarCultivo.php?Cultivo_id=$cultivo&Tipo_id=$dropdownValue";
     http.post(Uri.parse(url), body: {
       'Cultivo_id': cultivo.toString(),
       'Cultivo_apodo': apodoController.text,

@@ -197,7 +197,7 @@ class _EditarUsuarioState extends State<EditarUsuario> {
     var id = await FlutterSession().get('id');
 
     var url =
-        "http://152.173.193.119/pruebastesis/obtenerUsuarioeditar.php?Usuario_id=$id";
+        "http://192.168.1.81/pruebastesis/obtenerUsuarioeditar.php?Usuario_id=$id";
     final response = await http.get(Uri.parse(url));
     final datausu = jsonDecode(response.body);
     return datausu;
@@ -258,7 +258,7 @@ class _EditarUsuarioState extends State<EditarUsuario> {
     var id = await FlutterSession().get('id');
 
     var url =
-        "http://152.173.193.119/pruebastesis/editarUsuario.php?Usuario_id=$id";
+        "http://192.168.1.81/pruebastesis/editarUsuario.php?Usuario_id=$id";
     await http.post(Uri.parse(url), body: {
       'Usuario_nombre': nombreuController.text,
       'Usuario_correo': correoController.text,

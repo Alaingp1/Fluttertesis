@@ -33,6 +33,8 @@ class _RecuperarContrasenaState extends State<RecuperarContrasena> {
 
   @override
   Widget build(BuildContext context) {
+    Pattern passvalida = r"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,8}$";
+    RegExp regExp = RegExp(passvalida);
     return Scaffold(
       appBar: AppBar(),
       body: Container(
@@ -54,16 +56,12 @@ class _RecuperarContrasenaState extends State<RecuperarContrasena> {
               ),
               ElevatedButton(
                   onPressed: () async {
-                    await validarCorreo();
-                    validarCorreo().then((value) {
-                      datosusu = value;
-
-                      setState(() {});
-                    });
+                    datosusu = await validarCorreo();
+                    print(datosusu);
                     if (correocontroler.text == "") {
                       Fluttertoast.showToast(
                           msg: "ingrese un correo por favor ");
-                    } else if (datosusu[0]['Usuario_correo'] == null) {
+                    } else if (datosusu.length <= 0) {
                       Fluttertoast.showToast(
                           msg:
                               "no se ha encontrado ningun correo en nuestra base de datos");
@@ -93,11 +91,31 @@ class _RecuperarContrasenaState extends State<RecuperarContrasena> {
                       ),
                       ElevatedButton(
                           onPressed: () {
-                            editarUsuario();
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Login()));
+                            if (contrasenacontroller.text.isEmpty &&
+                                contrasenanuevacontroller.text.isEmpty) {
+                              if (regExp.hasMatch(contrasenacontroller.text) &&
+                                  regExp.hasMatch(
+                                      contrasenanuevacontroller.text)) {
+                                if (contrasenacontroller.text ==
+                                    contrasenanuevacontroller.text) {
+                                  editarUsuario();
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Login()));
+                                } else {
+                                  Fluttertoast.showToast(
+                                      msg: "las contraseñas deben ser iguales");
+                                }
+                              } else {
+                                Fluttertoast.showToast(
+                                    msg:
+                                        "la contraseñas deben tener minimo un caracter alfabetico y uno numerico y tener un largo minimo de 5 y maximo de 8");
+                              }
+                            } else {
+                              Fluttertoast.showToast(
+                                  msg: "por favor ingrese datos ");
+                            }
                           },
                           child: Text("cambiar contraseña"))
                     ],
@@ -115,7 +133,7 @@ class _RecuperarContrasenaState extends State<RecuperarContrasena> {
   Future<List> validarCorreo() async {
     var correo = correocontroler.text;
     var url =
-        "http://152.173.193.119/pruebastesis/validarCorreo.php?Usuario_correo=$correo";
+        "http://192.168.1.81/pruebastesis/validarCorreo.php?Usuario_correo=$correo";
     final response = await http.get(Uri.parse(url));
     final datauser = jsonDecode(response.body);
 
@@ -126,10 +144,9 @@ class _RecuperarContrasenaState extends State<RecuperarContrasena> {
     var correo = correocontroler.text;
 
     var url =
-        "http://152.173.193.119/pruebastesis/recuperarContrasena?Usuario_correo=$correo";
+        "http://192.168.1.81/pruebastesis/recuperarContrasena.php?Usuario_correo=$correo";
     await http.post(Uri.parse(url), body: {
       'Usuario_contrasena': contrasenacontroller.text,
     });
-    return true;
   }
 }

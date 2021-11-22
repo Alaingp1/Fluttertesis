@@ -51,7 +51,7 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
           IconButton(
             icon: Icon(Icons.delete),
             onPressed: () async {
-              var url = "http://152.173.193.119/pruebastesis/EliminarCultivo.php";
+              var url = "http://192.168.1.81/pruebastesis/EliminarCultivo.php";
               await http.post(Uri.parse(url), body: {
                 "Cultivo_id": widget.listaCult[widget.indexCult]['Cultivo_id']
               });
@@ -117,10 +117,10 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
                       children: [
                         Text("adquiriste nuestro producto(?)"),
                         ElevatedButton(
-                            onPressed: () {     
+                            onPressed: () {
                               Navigator.pushNamed(context, "conectarplaca",
                                   arguments: widget.listaCult[widget.indexCult]
-                                      ['Cultivo_id']);                                                                                                                                                                
+                                      ['Cultivo_id']);
                             },
                             child: Text("vincular")),
                       ],
@@ -172,7 +172,7 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
   eliminarCultivo() async {
     String cultivoid = widget.listaCult[widget.indexCult]['Cultivo_id'];
     var url =
-        'http://152.173.193.119/pruebastesis/EliminarCultivo.php?Cultivo_id=$cultivoid';
+        'http://192.168.1.81/pruebastesis/EliminarCultivo.php?Cultivo_id=$cultivoid';
     var response = await http.get(Uri.parse(url));
     return jsonDecode(response.body);
   }
@@ -181,7 +181,7 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
     var id = await FlutterSession().get('id');
     String cultivoid = widget.listaCult[widget.indexCult]['Cultivo_id'];
     var url =
-        'http://152.173.193.119/pruebastesis/obtenerSensores.php?Usuario_id=$id&Cultivo_id=$cultivoid';
+        'http://192.168.1.81/pruebastesis/obtenerSensores.php?Usuario_id=$id&Cultivo_id=$cultivoid';
     var response = await http.get(Uri.parse(url));
     return jsonDecode(response.body);
   }
