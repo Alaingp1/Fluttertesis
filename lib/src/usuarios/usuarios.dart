@@ -48,6 +48,10 @@ class _CuentaState extends State<Cuenta> {
       body: ListView.builder(
         itemCount: dataUsuario.length,
         itemBuilder: (context, index) {
+          var imagen = dataUsuario[index]['Usuario_foto'];
+          Pattern urlima =
+              r"((https?:www\.)|(https?:\/\/)|(www\.))[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9]{1,6}(\/[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)?";
+          RegExp regExp = RegExp(urlima);
           return GestureDetector(
             onTap: () {
               Navigator.of(context).push(
@@ -69,12 +73,19 @@ class _CuentaState extends State<Cuenta> {
                       width: 250,
                       height: 250,
                       child: dataUsuario[index]['Usuario_foto'] != null
-                          ? FadeInImage(
-                              image: NetworkImage(
-                                  dataUsuario[index]['Usuario_foto']),
-                              placeholder: AssetImage('assets/jar-loading.gif'),
-                              height: 500,
-                            )
+                          ? regExp.hasMatch(imagen)
+                              ? FadeInImage(
+                                  image: NetworkImage(
+                                      dataUsuario[index]['Usuario_foto']),
+                                  placeholder:
+                                      AssetImage('assets/jar-loading.gif'),
+                                )
+                              : FadeInImage(
+                                  image: NetworkImage(
+                                      "http://192.168.1.81/lefufuapp/public/uploads/trabajadores/$imagen"),
+                                  placeholder:
+                                      AssetImage('assets/jar-loading.gif'),
+                                )
                           : Image.asset(
                               "assets/no-image.png",
                               fit: BoxFit.fill,

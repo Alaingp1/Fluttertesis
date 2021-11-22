@@ -91,8 +91,8 @@ class _RecuperarContrasenaState extends State<RecuperarContrasena> {
                       ),
                       ElevatedButton(
                           onPressed: () {
-                            if (contrasenacontroller.text.isEmpty &&
-                                contrasenanuevacontroller.text.isEmpty) {
+                            if (contrasenacontroller.text.isNotEmpty &&
+                                contrasenanuevacontroller.text.isNotEmpty) {
                               if (regExp.hasMatch(contrasenacontroller.text) &&
                                   regExp.hasMatch(
                                       contrasenanuevacontroller.text)) {
@@ -114,7 +114,8 @@ class _RecuperarContrasenaState extends State<RecuperarContrasena> {
                               }
                             } else {
                               Fluttertoast.showToast(
-                                  msg: "por favor ingrese datos ");
+                                  msg:
+                                      "por favor rellene los campos de la contraseñas ");
                             }
                           },
                           child: Text("cambiar contraseña"))

@@ -18,4 +18,9 @@ class SensorProvider {
 
     return true;
   }
+
+  Future obtenerPlaca() async {
+    String url =
+        "http://192.168.1.81/pruebastesis/obtenerPlaca.php?Sensores_id=21&Cultivo_id=19";
+  }
 }

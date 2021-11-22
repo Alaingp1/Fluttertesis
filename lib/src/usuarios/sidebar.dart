@@ -35,6 +35,16 @@ class _NavDrawerState extends State<NavDrawer> {
 
   @override
   Widget build(BuildContext context) {
+    var imagen;
+    if (dataUsuario.length >= 1) {
+      if (dataUsuario[0]['Usuario_foto'] != null) {
+        imagen = dataUsuario[0]['Usuario_foto'];
+      }
+    }
+
+    Pattern urlima =
+        r"((https?:www\.)|(https?:\/\/)|(www\.))[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9]{1,6}(\/[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)?";
+    RegExp regExp = RegExp(urlima);
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -50,13 +60,19 @@ class _NavDrawerState extends State<NavDrawer> {
                       child: ClipOval(
                         child: dataUsuario.length >= 1
                             ? dataUsuario[0]['Usuario_foto'] != null
-                                ? FadeInImage(
-                                    image: NetworkImage(
-                                        dataUsuario[0]['Usuario_foto']),
-                                    placeholder:
-                                        AssetImage('assets/jar-loading.gif'),
-                                    fit: BoxFit.fill,
-                                  )
+                                ? regExp.hasMatch(imagen)
+                                    ? FadeInImage(
+                                        image: NetworkImage(
+                                            dataUsuario[0]['Usuario_foto']),
+                                        placeholder: AssetImage(
+                                            'assets/jar-loading.gif'),
+                                      )
+                                    : FadeInImage(
+                                        image: NetworkImage(
+                                            "http://192.168.1.81/lefufuapp/public/uploads/trabajadores/$imagen"),
+                                        placeholder: AssetImage(
+                                            'assets/jar-loading.gif'),
+                                      )
                                 : Image.asset(
                                     "assets/no-image.png",
                                     fit: BoxFit.fill,
