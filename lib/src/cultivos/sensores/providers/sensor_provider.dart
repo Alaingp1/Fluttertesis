@@ -21,6 +21,6 @@ class SensorProvider {
 
   Future obtenerPlaca() async {
     String url =
-        "http://192.168.1.81/pruebastesis/obtenerPlaca.php?Sensores_id=21&Cultivo_id=19";
+        "http://152.173.193.119/pruebastesis/obtenerPlaca.php?Sensores_id=21&Cultivo_id=19";
   }
 }

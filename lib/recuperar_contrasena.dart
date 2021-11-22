@@ -134,7 +134,7 @@ class _RecuperarContrasenaState extends State<RecuperarContrasena> {
   Future<List> validarCorreo() async {
     var correo = correocontroler.text;
     var url =
-        "http://192.168.1.81/pruebastesis/validarCorreo.php?Usuario_correo=$correo";
+        "http://152.173.193.119/pruebastesis/validarCorreo.php?Usuario_correo=$correo";
     final response = await http.get(Uri.parse(url));
     final datauser = jsonDecode(response.body);
 
@@ -145,7 +145,7 @@ class _RecuperarContrasenaState extends State<RecuperarContrasena> {
     var correo = correocontroler.text;
 
     var url =
-        "http://192.168.1.81/pruebastesis/recuperarContrasena.php?Usuario_correo=$correo";
+        "http://152.173.193.119/pruebastesis/recuperarContrasena.php?Usuario_correo=$correo";
     await http.post(Uri.parse(url), body: {
       'Usuario_contrasena': contrasenacontroller.text,
     });

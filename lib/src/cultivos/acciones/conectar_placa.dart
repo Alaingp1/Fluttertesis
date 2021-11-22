@@ -38,7 +38,7 @@ class _PlacaState extends State<Placa> {
   void generarOrden() async {
     var cultivo = ModalRoute.of(context).settings.arguments as String;
     print('vinculando placa ${macPlaca.text} al cultivo $cultivo');
-    var url = "http://192.168.1.81/pruebastesis/agregarMac.php";
+    var url = "http://152.173.193.119/pruebastesis/agregarMac.php";
     // final response = await http.get(Uri.parse(url));
     await http.post(
       Uri.parse(url),

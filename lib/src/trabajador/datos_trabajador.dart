@@ -22,7 +22,8 @@ class DatosTrabajador extends StatefulWidget {
 class _DatosTrabajadorState extends State<DatosTrabajador> {
   Future<List> obtenerUsuarios() async {
     var id = await FlutterSession().get('id');
-    var url = "http://192.168.1.81/pruebastesis/obtenerDatos.php?Usuarioid=$id";
+    var url =
+        "http://152.173.193.119/pruebastesis/obtenerDatos.php?Usuarioid=$id";
     final response = await http.get(Uri.parse(url));
     return json.decode(response.body);
   }
@@ -98,7 +99,7 @@ class ElementoLista extends StatelessWidget {
                   height: 250,
                   child: lista[posicion]['Usuario_foto'] != null
                       ? Image.network(
-                          "http://192.168.1.81/lefufuapp/public/uploads/trabajadores/$fotousu",
+                          "http://152.173.193.119/lefufuapp/public/uploads/trabajadores/$fotousu",
                           fit: BoxFit.fill,
                         )
                       : Image.asset(

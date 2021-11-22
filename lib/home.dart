@@ -95,7 +95,7 @@ class _HomeState extends State<Home> {
                               )
                             : FadeInImage(
                                 image: NetworkImage(
-                                    "http://192.168.1.81/lefufuapp/public/uploads/publicaciones/$imagen"),
+                                    "http://152.173.193.119/lefufuapp/public/uploads/publicaciones/$imagen"),
                                 placeholder:
                                     AssetImage('assets/jar-loading.gif'),
                               )
@@ -121,7 +121,7 @@ class _HomeState extends State<Home> {
   }
 
   Future<List> verPublicaciones() async {
-    var url = "http://192.168.1.81/pruebastesis/obtenerPublicaciones.php";
+    var url = "http://152.173.193.119/pruebastesis/obtenerPublicaciones.php";
     final response = await http.get(Uri.parse(url));
     final dataPub = jsonDecode(response.body);
     return dataPub;
