@@ -163,7 +163,7 @@ class _AgregarCultivoState extends State<AgregarCultivo> {
 
   Future _seleccionarFoto() async {
     final pickedFoto =
-        await ImagePicker().getImage(source: ImageSource.gallery);
+        await ImagePicker().pickImage(source: ImageSource.gallery);
 
     setState(() {
       if (pickedFoto != null) {
@@ -220,7 +220,7 @@ class _AgregarCultivoState extends State<AgregarCultivo> {
   Future registrarcultivo() async {
     var id = await FlutterSession().get('id');
     var url =
-        'http://152.173.193.119/pruebastesis/Crearcultivo.php?Usuario_id=$id&Tipo_id=$dropdownValue';
+        'http://152.173.217.136/pruebastesis/Crearcultivo.php?Usuario_id=$id&Tipo_id=$dropdownValue';
     await http.post(Uri.parse(url), body: {
       'Cultivo_apodo': apodoController.text,
       'Cultivo_imagen': urlIma.toString(),

@@ -18,7 +18,7 @@ class _TrabajadorState extends State<Trabajador> {
   Future<Map> obtenerUsuarios() async {
     var id = await FlutterSession().get('id');
     var url =
-        "http://152.173.193.119/pruebastesis/obtenerHorario.php?Usuarioid=$id";
+        "http://152.173.217.136/pruebastesis/obtenerHorario.php?Usuarioid=$id";
     final response = await http.get(Uri.parse(url));
     return json.decode(response.body);
   }
@@ -107,7 +107,7 @@ class _TrabajadorState extends State<Trabajador> {
   }
 
   Future<List> verPublicaciones() async {
-    var url = "http://152.173.193.119/pruebastesis/obtenerPublicaciones.php";
+    var url = "http://152.173.217.136/pruebastesis/obtenerPublicaciones.php";
     final response = await http.get(Uri.parse(url));
     final dataPub = jsonDecode(response.body);
     return dataPub;

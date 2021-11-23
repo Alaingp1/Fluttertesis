@@ -28,9 +28,7 @@ import 'package:flutter_tesisv2/src/usuarios/usuarios.dart';
 import 'src/cultivos/acciones/conectar_placa.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  // Initialize a new Firebase App instance
+  WidgetsFlutterBinding.ensureInitialized();  
   await Firebase.initializeApp();
   runApp(MyApp());
 }

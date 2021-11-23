@@ -14,46 +14,26 @@ class Sensores extends StatefulWidget {
 class _SensoresState extends State<Sensores> {
   SensorModel sensor = SensorModel();
   final sensorProvider = SensorProvider();
+
   TextEditingController minima = TextEditingController();
   TextEditingController maxima = TextEditingController();
   TextEditingController humedad = TextEditingController();
+  TextEditingController macAddress = TextEditingController();
+
+  bool flag = false;
 
   @override
   Widget build(BuildContext context) {
+    final node = FocusScope.of(context);
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 100),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                FaIcon(
-                  FontAwesomeIcons.image,
-                  size: 60,
-                ),
-                Text('Sensor de Sensores')
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Activar notificaciones'),
-                Switch(
-                  onChanged: (value) => setState(() {
-                    sensor.estado = value;
-                  }),
-                  activeColor: Colors.green,
-                  value: sensor.estado,
-                ),
-              ],
-            ),
-            _minima(),
-            _maxima(),
-            _humedad(),
+            flag ? listaSensores() : Text("Registra tu producto"),
             ElevatedButton(
-              onPressed: _submit,
-              child: Text("asignar parametros"),
+              onPressed: flag ? _submit : _setMacAdress,
+              child: Text(flag ? "asignar parametros" : "vincular placa"),
             ),
           ],
         ),
@@ -61,67 +41,76 @@ class _SensoresState extends State<Sensores> {
     );
   }
 
-  Widget _minima() {
-    final node = FocusScope.of(context);
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.only(right: 60),
-      child: TextField(
-        controller: minima,
-        decoration: InputDecoration(
-          labelText: 'Sensores minima',
-          suffixText: 'c°',
-        ),
-        enabled: true,
-        keyboardType: TextInputType.number,
-      ),
-    );
-  }
 
-  Widget _maxima() {
-    final node = FocusScope.of(context);
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.only(right: 60),
-      child: TextField(
-        controller: maxima,
-        decoration: InputDecoration(
-          labelText: 'Sensores maxima',
-          suffixText: 'c°',
-        ),
-        enabled: true,
-        keyboardType: TextInputType.number,
-      ),
-    );
-  }
 
-  Widget _humedad() {
-    final node = FocusScope.of(context);
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.only(right: 60),
-      child: TextField(
-        controller: humedad,
-        decoration: InputDecoration(
-          labelText: 'Humedad de la planta',
-          suffixText: '%',
+  Widget listaSensores() {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('Activar notificaciones'),
+            Switch(
+              onChanged: (value) => setState(() {}),
+              activeColor: Colors.green,
+              value: sensor == null ? false : true,
+            ),
+          ],
         ),
-        keyboardType: TextInputType.number,
-      ),
+        Container(
+          width: MediaQuery.of(context).size.width,
+          padding: EdgeInsets.only(right: 60),
+          child: TextField(
+            controller: minima,
+            decoration: InputDecoration(
+              labelText: 'Sensores minima',
+              suffixText: 'c°',
+            ),
+            enabled: true,
+            keyboardType: TextInputType.number,
+          ),
+        ),
+        Container(
+          width: MediaQuery.of(context).size.width,
+          padding: EdgeInsets.only(right: 60),
+          child: TextField(
+            controller: maxima,
+            decoration: InputDecoration(
+              labelText: 'Sensores maxima',
+              suffixText: 'c°',
+            ),
+            enabled: true,
+            keyboardType: TextInputType.number,
+          ),
+        ),
+        Container(
+          width: MediaQuery.of(context).size.width,
+          padding: EdgeInsets.only(right: 60),
+          child: TextField(
+            controller: humedad,
+            decoration: InputDecoration(
+              labelText: 'Humedad de la planta',
+              suffixText: '%',
+            ),
+            keyboardType: TextInputType.number,
+          ),
+        )
+      ],
     );
   }
 
   void _submit() {
-    print("minima  " + minima.text);
-    print("maxima  " + maxima.text);
-    print("humedad " + humedad.text);
-    sensor.SensoresMinima = int.parse(minima.text);
-    sensor.SensoresMaxima = int.parse(maxima.text);
+    sensor.SensoresMaxima = int.parse(minima.text);
+    sensor.SensoresMinima = int.parse(maxima.text);
     sensor.humedad = int.parse(humedad.text);
-    print("minima  " + sensor.SensoresMinima.toString());
-    print("maxima  " + sensor.SensoresMaxima.toString());
-    print("humedad " + sensor.humedad.toString());
-
     sensorProvider.asignarDatos(sensor);
+  }
+
+  void _setMacAdress(){
+    print("macAddress " + macAddress.text);
+    sensor.name = macAddress.text;
+    setState(() {
+      flag = true;    
+    });   
   }
 }

@@ -30,7 +30,7 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
     obtenerSensores().then((value) {
       if (value.length >= 1) {
         datasensor = int.parse(value[0]['Sensores_id']);
-        setState(() {});
+        print('sensor: $datasensor');
       }
     });
 
@@ -52,7 +52,7 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
             icon: Icon(Icons.delete),
             onPressed: () async {
               var url =
-                  "http://152.173.193.119/pruebastesis/EliminarCultivo.php";
+                  "http://152.173.217.136/pruebastesis/EliminarCultivo.php";
               await http.post(Uri.parse(url), body: {
                 "Cultivo_id": widget.listaCult[widget.indexCult]['Cultivo_id']
               });
@@ -81,24 +81,20 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
         child: Container(
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Nombre del Cultivo:   " +
-                        widget.listaCult[widget.indexCult]['Cultivo_apodo'],
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.white),
-                    textAlign: TextAlign.center,
-                  ),
-                  Text(
-                    "Tipo del Cultivo:   " +
-                        widget.listaCult[widget.indexCult]['Tipo_nombre'],
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.white),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
+              Text(
+                "Nombre del Cultivo:   " +
+                    widget.listaCult[widget.indexCult]['Cultivo_apodo'],
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                textAlign: TextAlign.center,
+              ),
+              Divider(),
+              Text(
+                "Tipo del Cultivo:   " +
+                    widget.listaCult[widget.indexCult]['Tipo_nombre'],
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                textAlign: TextAlign.center,
               ),
               Divider(),
               Container(
@@ -111,24 +107,7 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
                   )),
               Divider(),
               Divider(),
-              Visibility(
-                  child: Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("adquiriste nuestro producto(?)"),
-                        ElevatedButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, "conectarplaca",
-                                  arguments: widget.listaCult[widget.indexCult]
-                                      ['Cultivo_id']);
-                            },
-                            child: Text("vincular")),
-                      ],
-                    ),
-                  ),
-                  visible: verificado),
-              datasensor != 0
+              datasensor > 0
                   ? Container(
                       child: ListBody(
                         children: [
@@ -161,8 +140,18 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
                       ),
                     )
                   : Container(
-                      color: Colors.amber,
-                    )
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("adquiriste nuestro producto(?)"),
+                          ElevatedButton(
+                              onPressed: () {
+                                navigateToSubPage(context);
+                              },
+                              child: Text("vincular")),
+                        ],
+                      ),
+                    ),
             ],
           ),
         ),
@@ -170,10 +159,20 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
     );
   }
 
+  Future navigateToSubPage(context) async {
+    String message = await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => Placa(
+                  algo: widget.listaCult[widget.indexCult]['Cultivo_id'],
+                )));
+    print('mac resivida desde conectar: $message');
+  }
+
   eliminarCultivo() async {
     String cultivoid = widget.listaCult[widget.indexCult]['Cultivo_id'];
     var url =
-        'http://152.173.193.119/pruebastesis/EliminarCultivo.php?Cultivo_id=$cultivoid';
+        'http://152.173.217.136/pruebastesis/EliminarCultivo.php?Cultivo_id=$cultivoid';
     var response = await http.get(Uri.parse(url));
     return jsonDecode(response.body);
   }
@@ -182,7 +181,7 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
     var id = await FlutterSession().get('id');
     String cultivoid = widget.listaCult[widget.indexCult]['Cultivo_id'];
     var url =
-        'http://152.173.193.119/pruebastesis/obtenerSensores.php?Usuario_id=$id&Cultivo_id=$cultivoid';
+        'http://152.173.217.136/pruebastesis/obtenerSensores.php?Usuario_id=$id&Cultivo_id=$cultivoid';
     var response = await http.get(Uri.parse(url));
     return jsonDecode(response.body);
   }

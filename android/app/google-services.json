@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "775834008848",
+    "firebase_url": "https://lefufudb-default-rtdb.firebaseio.com",
     "project_id": "lefufudb",
     "storage_bucket": "lefufudb.appspot.com"
   },

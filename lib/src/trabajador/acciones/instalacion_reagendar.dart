@@ -83,7 +83,7 @@ class _ReagendarInstalacionState extends State<ReagendarInstalacion> {
   void reagendarinstalacion() async {
     var id = await FlutterSession().get('id');
     var orden = ModalRoute.of(context).settings.arguments as String;
-    var url = "http://152.173.193.119/pruebastesis/reagendarInstalacion.php";
+    var url = "http://152.173.217.136/pruebastesis/reagendarInstalacion.php";
     http.post(
       Uri.parse(url),
       body: {

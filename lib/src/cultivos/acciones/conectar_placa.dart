@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_session/flutter_session.dart';
 import 'package:flutter_tesisv2/src/usuarios/sidebar.dart';
 import 'package:http/http.dart' as http;
 
 class Placa extends StatefulWidget {
   static const String ROUTE = '/conectarplaca';
+  final String algo;
+
+  const Placa({Key key, this.algo}) : super(key: key);
   @override
   _PlacaState createState() => _PlacaState();
 }
 
 class _PlacaState extends State<Placa> {
-  TextEditingController wifinombre = TextEditingController();
-  TextEditingController wificontrasena = TextEditingController();
   TextEditingController macPlaca = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -28,6 +30,7 @@ class _PlacaState extends State<Placa> {
           ElevatedButton(
               onPressed: () {
                 generarOrden();
+                Navigator.pop(context, macPlaca.text);
               },
               child: const Text("aceptar"))
         ],
@@ -36,14 +39,14 @@ class _PlacaState extends State<Placa> {
   }
 
   void generarOrden() async {
-    var cultivo = ModalRoute.of(context).settings.arguments as String;
-    print('vinculando placa ${macPlaca.text} al cultivo $cultivo');
-    var url = "http://152.173.193.119/pruebastesis/agregarMac.php";
+    var cultivo1 = widget.algo;    
+    print('vinculando placa ${macPlaca.text} al cultivo $cultivo1');
+    var url = "http://152.173.217.136/pruebastesis/agregarMac.php";
     // final response = await http.get(Uri.parse(url));
     await http.post(
       Uri.parse(url),
       body: {
-        "Cultivo_id": cultivo,
+        "Cultivo_id": cultivo1,
         "Sensores_nombre": macPlaca.text,
       },
     );
