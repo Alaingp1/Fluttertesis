@@ -213,7 +213,7 @@ class _RegistroState extends State<Registro> {
   }
 
   void registrarusuario() {
-    var url = 'http://152.173.193.119/pruebastesis/crearUsuario.php';
+    var url = 'http://152.173.217.136/pruebastesis/crearUsuario.php';
     http.post(Uri.parse(url), body: {
       'Usuario_nombre': nombreuController.text,
       'Usuario_correo': emailController.text,

@@ -69,7 +69,7 @@ class _NavDrawerState extends State<NavDrawer> {
                                       )
                                     : FadeInImage(
                                         image: NetworkImage(
-                                            "http://152.173.193.119/lefufuapp/public/uploads/trabajadores/$imagen"),
+                                            "http://152.173.217.136/lefufuapp/public/uploads/trabajadores/$imagen"),
                                         placeholder: AssetImage(
                                             'assets/jar-loading.gif'),
                                       )
@@ -152,7 +152,7 @@ class _NavDrawerState extends State<NavDrawer> {
   Future<List> verUsuario() async {
     var id = await FlutterSession().get('id');
     var url =
-        "http://152.173.193.119/pruebastesis/obtenerUsuario.php?Usuario_id=$id";
+        "http://152.173.217.136/pruebastesis/obtenerUsuario.php?Usuario_id=$id";
     final response = await http.get(Uri.parse(url));
     final dataUsuario = jsonDecode(response.body);
 

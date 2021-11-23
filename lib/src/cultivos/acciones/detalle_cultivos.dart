@@ -52,7 +52,7 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
             icon: Icon(Icons.delete),
             onPressed: () async {
               var url =
-                  "http://152.173.193.119/pruebastesis/EliminarCultivo.php";
+                  "http://152.173.217.136/pruebastesis/EliminarCultivo.php";
               await http.post(Uri.parse(url), body: {
                 "Cultivo_id": widget.listaCult[widget.indexCult]['Cultivo_id']
               });
@@ -111,23 +111,36 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
                   )),
               Divider(),
               Divider(),
-              Visibility(
-                  child: Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("adquiriste nuestro producto(?)"),
-                        ElevatedButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, "conectarplaca",
-                                  arguments: widget.listaCult[widget.indexCult]
-                                      ['Cultivo_id']);
-                            },
-                            child: Text("vincular")),
-                      ],
-                    ),
-                  ),
-                  visible: verificado),
+              Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    datasensor == 0
+                        ? Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("adquiriste nuestro producto(?)"),
+                                ],
+                              ),
+                              ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.pushNamed(
+                                        context, "conectarplaca",
+                                        arguments:
+                                            widget.listaCult[widget.indexCult]
+                                                ['Cultivo_id']);
+                                  },
+                                  child: Text("vincular")),
+                            ],
+                          )
+                        : Container(
+                            color: Colors.amber,
+                          )
+                  ],
+                ),
+              ),
               datasensor != 0
                   ? Container(
                       child: ListBody(
@@ -173,7 +186,7 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
   eliminarCultivo() async {
     String cultivoid = widget.listaCult[widget.indexCult]['Cultivo_id'];
     var url =
-        'http://152.173.193.119/pruebastesis/EliminarCultivo.php?Cultivo_id=$cultivoid';
+        'http://152.173.217.136/pruebastesis/EliminarCultivo.php?Cultivo_id=$cultivoid';
     var response = await http.get(Uri.parse(url));
     return jsonDecode(response.body);
   }
@@ -182,7 +195,7 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
     var id = await FlutterSession().get('id');
     String cultivoid = widget.listaCult[widget.indexCult]['Cultivo_id'];
     var url =
-        'http://152.173.193.119/pruebastesis/obtenerSensores.php?Usuario_id=$id&Cultivo_id=$cultivoid';
+        'http://152.173.217.136/pruebastesis/obtenerSensores.php?Usuario_id=$id&Cultivo_id=$cultivoid';
     var response = await http.get(Uri.parse(url));
     return jsonDecode(response.body);
   }

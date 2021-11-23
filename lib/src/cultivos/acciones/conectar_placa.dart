@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tesisv2/src/cultivos/acciones/detalle_cultivos.dart';
 import 'package:flutter_tesisv2/src/usuarios/sidebar.dart';
 import 'package:http/http.dart' as http;
 
@@ -28,6 +29,7 @@ class _PlacaState extends State<Placa> {
           ElevatedButton(
               onPressed: () {
                 generarOrden();
+                Navigator.pop(context);
               },
               child: const Text("aceptar"))
         ],
@@ -38,7 +40,7 @@ class _PlacaState extends State<Placa> {
   void generarOrden() async {
     var cultivo = ModalRoute.of(context).settings.arguments as String;
     print('vinculando placa ${macPlaca.text} al cultivo $cultivo');
-    var url = "http://152.173.193.119/pruebastesis/agregarMac.php";
+    var url = "http://152.173.217.136/pruebastesis/agregarMac.php";
     // final response = await http.get(Uri.parse(url));
     await http.post(
       Uri.parse(url),
