@@ -30,6 +30,7 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
     obtenerSensores().then((value) {
       if (value.length >= 1) {
         datasensor = int.parse(value[0]['Sensores_id']);
+        setState(() {});
         print('sensor: $datasensor');
       }
     });
@@ -107,41 +108,31 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
                   )),
               Divider(),
               Divider(),
-<<<<<<< HEAD
-              Container(
+              datasensor == 0
+                  ? Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("adquiriste nuestro producto(?)"),
+                          ElevatedButton(
+                              onPressed: () {
+                                navigateToSubPage(context);
+                              },
+                              child: Text("vincular")),
+                        ],
+                      ),
+                    )
+                  : Container(),
+              /*  Container(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    datasensor == 0
-                        ? Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text("adquiriste nuestro producto(?)"),
-                                ],
-                              ),
-                              ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.pushNamed(
-                                        context, "conectarplaca",
-                                        arguments:
-                                            widget.listaCult[widget.indexCult]
-                                                ['Cultivo_id']);
-                                  },
-                                  child: Text("vincular")),
-                            ],
-                          )
-                        : Container(
-                            color: Colors.amber,
-                          )
+                   
                   ],
                 ),
               ),
+              datasensor != 0 */
               datasensor != 0
-=======
-              datasensor > 0
->>>>>>> 2ea19a59e8b483f82b7a218583e2427ce1aa3c66
                   ? Container(
                       child: ListBody(
                         children: [
@@ -173,19 +164,7 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
                         ],
                       ),
                     )
-                  : Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("adquiriste nuestro producto(?)"),
-                          ElevatedButton(
-                              onPressed: () {
-                                navigateToSubPage(context);
-                              },
-                              child: Text("vincular")),
-                        ],
-                      ),
-                    ),
+                  : Container()
             ],
           ),
         ),

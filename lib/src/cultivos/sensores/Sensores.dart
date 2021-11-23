@@ -41,8 +41,6 @@ class _SensoresState extends State<Sensores> {
     );
   }
 
-
-
   Widget listaSensores() {
     return Column(
       children: [
@@ -103,14 +101,14 @@ class _SensoresState extends State<Sensores> {
     sensor.SensoresMaxima = int.parse(minima.text);
     sensor.SensoresMinima = int.parse(maxima.text);
     sensor.humedad = int.parse(humedad.text);
-    sensorProvider.asignarDatos(sensor);
+    sensorProvider.obtenerPlaca();
   }
 
-  void _setMacAdress(){
+  void _setMacAdress() {
     print("macAddress " + macAddress.text);
     sensor.name = macAddress.text;
     setState(() {
-      flag = true;    
-    });   
+      flag = true;
+    });
   }
 }
