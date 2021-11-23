@@ -163,7 +163,7 @@ class _AgregarCultivoState extends State<AgregarCultivo> {
 
   Future _seleccionarFoto() async {
     final pickedFoto =
-        await ImagePicker().getImage(source: ImageSource.gallery);
+        await ImagePicker().pickImage(source: ImageSource.gallery);
 
     setState(() {
       if (pickedFoto != null) {

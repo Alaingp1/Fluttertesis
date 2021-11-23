@@ -30,7 +30,7 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
     obtenerSensores().then((value) {
       if (value.length >= 1) {
         datasensor = int.parse(value[0]['Sensores_id']);
-        setState(() {});
+        print('sensor: $datasensor');
       }
     });
 
@@ -81,24 +81,20 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
         child: Container(
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Nombre del Cultivo:   " +
-                        widget.listaCult[widget.indexCult]['Cultivo_apodo'],
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.white),
-                    textAlign: TextAlign.center,
-                  ),
-                  Text(
-                    "Tipo del Cultivo:   " +
-                        widget.listaCult[widget.indexCult]['Tipo_nombre'],
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.white),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
+              Text(
+                "Nombre del Cultivo:   " +
+                    widget.listaCult[widget.indexCult]['Cultivo_apodo'],
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                textAlign: TextAlign.center,
+              ),
+              Divider(),
+              Text(
+                "Tipo del Cultivo:   " +
+                    widget.listaCult[widget.indexCult]['Tipo_nombre'],
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                textAlign: TextAlign.center,
               ),
               Divider(),
               Container(
@@ -111,6 +107,7 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
                   )),
               Divider(),
               Divider(),
+<<<<<<< HEAD
               Container(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -142,6 +139,9 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
                 ),
               ),
               datasensor != 0
+=======
+              datasensor > 0
+>>>>>>> 2ea19a59e8b483f82b7a218583e2427ce1aa3c66
                   ? Container(
                       child: ListBody(
                         children: [
@@ -174,13 +174,33 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
                       ),
                     )
                   : Container(
-                      color: Colors.amber,
-                    )
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("adquiriste nuestro producto(?)"),
+                          ElevatedButton(
+                              onPressed: () {
+                                navigateToSubPage(context);
+                              },
+                              child: Text("vincular")),
+                        ],
+                      ),
+                    ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  Future navigateToSubPage(context) async {
+    String message = await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => Placa(
+                  algo: widget.listaCult[widget.indexCult]['Cultivo_id'],
+                )));
+    print('mac resivida desde conectar: $message');
   }
 
   eliminarCultivo() async {
