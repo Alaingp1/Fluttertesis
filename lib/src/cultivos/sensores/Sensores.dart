@@ -30,10 +30,10 @@ class _SensoresState extends State<Sensores> {
         padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 100),
         child: Column(
           children: [
-            flag ? listaSensores() : Text("Registra tu producto"),
+            listaSensores(),
             ElevatedButton(
-              onPressed: flag ? _submit : _setMacAdress,
-              child: Text(flag ? "asignar parametros" : "vincular placa"),
+              onPressed: _submit,
+              child: Text("asignar parametros"),
             ),
           ],
         ),
@@ -98,8 +98,8 @@ class _SensoresState extends State<Sensores> {
   }
 
   void _submit() {
-    sensor.SensoresMaxima = int.parse(minima.text);
-    sensor.SensoresMinima = int.parse(maxima.text);
+    sensor.sensoresMaxima = int.parse(minima.text);
+    sensor.sensoresMinima = int.parse(maxima.text);
     sensor.humedad = int.parse(humedad.text);
     sensorProvider.obtenerPlaca();
   }

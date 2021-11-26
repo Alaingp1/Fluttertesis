@@ -39,13 +39,13 @@ class _ProductosState extends State<Productos> {
   }
 
   Future<List> verProductos() async {
-    var url = "http://152.173.217.136/pruebastesis/obtenerProducto.php";
+    var url = "http://152.173.207.169/pruebastesis/obtenerProducto.php";
     final response = await http.get(Uri.parse(url));
     return jsonDecode(response.body);
   }
 
   Future verCategoria() async {
-    var url = "http://152.173.217.136/pruebastesis/verCategorias.php";
+    var url = "http://152.173.207.169/pruebastesis/verCategorias.php";
     final response = await http.get(Uri.parse(url));
     final dataJson = jsonDecode(response.body);
     return dataJson;
@@ -53,7 +53,7 @@ class _ProductosState extends State<Productos> {
 
   Future<List> filtroCategoria() async {
     var url =
-        "http://152.173.217.136/pruebastesis/filtroCategorias.php?Categoria_id=$dropdownValue";
+        "http://152.173.207.169/pruebastesis/filtroCategorias.php?Categoria_id=$dropdownValue";
     final response = await http.get(Uri.parse(url));
     final dataFiltro = jsonDecode(response.body);
     return dataFiltro;
@@ -62,7 +62,7 @@ class _ProductosState extends State<Productos> {
   Future filtroNombre() async {
     f = filtron.text;
     var url =
-        "http://152.173.217.136/pruebastesis/filtroNombre.php?Producto_nombre=$f";
+        "http://152.173.207.169/pruebastesis/filtroNombre.php?Producto_nombre=$f";
     final response = await http.get(Uri.parse(url));
     return jsonDecode(response.body);
   }
@@ -94,6 +94,7 @@ class _ProductosState extends State<Productos> {
         child: Container(
           child: Column(
             children: [
+              Divider(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -105,7 +106,7 @@ class _ProductosState extends State<Productos> {
                     ),
                     onChanged: (String newvalue) {
                       dropdownValue = newvalue;
-                      if (dropdownValue == 0) {
+                      if (dropdownValue == null) {
                       } else {
                         filtroCategoria().then((value) {
                           dataProd = value;
@@ -124,13 +125,14 @@ class _ProductosState extends State<Productos> {
                   ),
                   ElevatedButton(
                       onPressed: () {
-                        dropdownValue == 0;
+                        dropdownValue = null;
                         verProductos().then((value) {
                           dataProd = value;
                           setState(() {});
                         });
                       },
                       child: Text("quitar filtro")),
+                  Divider()
                 ],
               ),
               ListView.builder(
@@ -148,58 +150,55 @@ class _ProductosState extends State<Productos> {
                         ),
                       ));
                     },
-                    child: Container(
-                      child: Card(
-                        color: Colors.purple,
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 25.0,
-                            ),
-                            Container(
-                              width: 250,
-                              height: 250,
-                              child: dataProd[index]['Producto_foto'] != null ||
-                                      dataProd[index]['Producto_foto'] == ""
-                                  ? FadeInImage(
-                                      image: NetworkImage(
-                                          "http://152.173.217.136/lefufuapp/public/uploads/kits/$imagenprod"),
-                                      placeholder:
-                                          AssetImage('assets/jar-loading.gif'),
-                                      height: 500,
-                                    )
-                                  : Image.asset(
-                                      "assets/no-image.png",
-                                      fit: BoxFit.fill,
-                                    ),
-                            ),
-                            Text(
-                              dataProd[index]['Producto_nombre'],
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                              textAlign: TextAlign.center,
-                            ),
-                            SizedBox(
-                              height: 25.0,
-                            ),
-                            Text(
-                              "precio \$" + dataProd[index]['Producto_precio'],
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                              textAlign: TextAlign.center,
-                            ),
-                            SizedBox(
-                              height: 25.0,
-                            ),
-                          ],
-                        ),
+                    child: Card(
+                      color: Colors.indigo,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 25.0,
+                          ),
+                          Container(
+                            width: 250,
+                            height: 250,
+                            child: dataProd[index]['Producto_foto'] != null ||
+                                    dataProd[index]['Producto_foto'] == ""
+                                ? FadeInImage(
+                                    image: NetworkImage(
+                                        "http://152.173.207.169/lefufuapp/public/uploads/kits/$imagenprod"),
+                                    placeholder:
+                                        AssetImage('assets/jar-loading.gif'),
+                                    height: 500,
+                                  )
+                                : Image.asset(
+                                    "assets/no-image.png",
+                                    fit: BoxFit.fill,
+                                  ),
+                          ),
+                          Text(
+                            dataProd[index]['Producto_nombre'],
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                            textAlign: TextAlign.center,
+                          ),
+                          Divider(),
+                          Text(
+                            "precio \$" + dataProd[index]['Producto_precio'],
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                            textAlign: TextAlign.center,
+                          ),
+                          Divider(),
+                        ],
                       ),
                     ),
                   );
                 },
               ),
+              Divider(),
             ],
           ),
         ),

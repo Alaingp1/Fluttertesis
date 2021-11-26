@@ -29,9 +29,14 @@ class _OrdenarProductoState extends State<OrdenarProducto> {
   TextEditingController controlDireccion = new TextEditingController();
   TextEditingController controlTelefono = new TextEditingController();
   final _formKey = GlobalKey<FormState>();
-
+  var producto;
+  int precio = 0;
   @override
   void initState() {
+    if (cantidad != 0) {
+      precio = int.parse(producto['Producto_precio']);
+    }
+
     obtenerUsuarios().then((value) {
       datauser = value;
 
@@ -48,7 +53,9 @@ class _OrdenarProductoState extends State<OrdenarProducto> {
 
   @override
   Widget build(BuildContext context) {
-    print(datastock);
+    producto = ModalRoute.of(context).settings.arguments as Map;
+
+    print(precio);
     return Scaffold(
       appBar: AppBar(),
       body: Center(
@@ -116,6 +123,11 @@ class _OrdenarProductoState extends State<OrdenarProducto> {
                               step: 1,
                               onValue: (value) {
                                 cantidad = value;
+                                precio =
+                                    int.parse(producto['Producto_precio']) *
+                                        cantidad;
+
+                                setState(() {});
                               },
                             )
                           : Container(
@@ -123,6 +135,17 @@ class _OrdenarProductoState extends State<OrdenarProducto> {
                             ),
                       SizedBox(
                         height: 30.0,
+                      ),
+                      Text(
+                        "Precio : " + precio.toString(),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 15),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(
+                        height: 20.0,
                       ),
                       Text(
                         "Seleccione la fecha para la instalacion",
@@ -185,8 +208,9 @@ class _OrdenarProductoState extends State<OrdenarProducto> {
 
   void generarOrden() async {
     var id = await FlutterSession().get('id');
-    var producto = ModalRoute.of(context).settings.arguments as String;
-    var url = "http://152.173.217.136/pruebastesis/generarOrden2.php";
+    var producto = ModalRoute.of(context).settings.arguments as Map;
+    print(producto);
+    var url = "http://152.173.207.169/pruebastesis/generarOrden2.php";
     // final response = await http.get(Uri.parse(url));
     http.post(
       Uri.parse(url),
@@ -194,7 +218,7 @@ class _OrdenarProductoState extends State<OrdenarProducto> {
         "Usuario_id": id.toString(),
         "Orden_Fecha": controlFecha.text.toString(),
         "Orden_cantidad_producto": cantidad.toString(),
-        "Producto_id": producto.toString(),
+        "Producto_id": producto['Producto_id'].toString(),
       },
     );
   }
@@ -223,7 +247,7 @@ class _OrdenarProductoState extends State<OrdenarProducto> {
   void validarDatos() async {
     var id = await FlutterSession().get('id');
     var url =
-        "http://152.173.217.136/pruebastesis/validarDatos.php?Usuario_id=$id";
+        "http://152.173.207.169/pruebastesis/validarDatos.php?Usuario_id=$id";
     http.post(Uri.parse(url), body: {
       'Usuario_direccion': controlDireccion.text,
       'Usuario_telefono': controlTelefono.text,
@@ -233,17 +257,17 @@ class _OrdenarProductoState extends State<OrdenarProducto> {
   Future<Map<String, dynamic>> obtenerUsuarios() async {
     var id = await FlutterSession().get('id');
     var url =
-        "http://152.173.217.136/pruebastesis/obtenerDatos.php?Usuarioid=$id";
+        "http://152.173.207.169/pruebastesis/obtenerDatos.php?Usuarioid=$id";
     final response = await http.get(Uri.parse(url));
     return json.decode(response.body)[0];
   }
 
   Future obtenerCantidad() async {
     var id = await FlutterSession().get('id');
-    var producto = ModalRoute.of(context).settings.arguments as String;
-
+    var producto = ModalRoute.of(context).settings.arguments as Map;
+    var idProd = producto['Producto_id'];
     var url =
-        "http://152.173.217.136/pruebastesis/obtenerCantidad.php?Producto_id=$producto";
+        "http://152.173.207.169/pruebastesis/obtenerCantidad.php?Producto_id=$idProd";
     final response = await http.get(Uri.parse(url));
 
     return json.decode(response.body);

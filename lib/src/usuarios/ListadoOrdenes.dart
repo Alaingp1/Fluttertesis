@@ -20,7 +20,7 @@ class _ListadoOrdenesState extends State<ListadoOrdenes> {
   Future<List> obtenerOrdenes() async {
     var id = await FlutterSession().get('id');
     var url =
-        "http://152.173.217.136/pruebastesis/obtenerOrdenes.php?Usuario_id=$id";
+        "http://152.173.207.169/pruebastesis/obtenerOrdenes.php?Usuario_id=$id";
     final response = await http.get(Uri.parse(url));
     return json.decode(response.body);
   }
@@ -82,6 +82,15 @@ class ElementoLista extends StatelessWidget {
                     Text(
                       "Nombre: " "" + lista[posicion]['Producto_nombre'],
                       style: TextStyle(fontSize: 15, color: Colors.white),
+                    ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    Text(
+                      "Fecha de instalacion: " "" +
+                          lista[posicion]['Orden_Fecha'],
+                      style: TextStyle(fontSize: 15, color: Colors.white),
+                      textAlign: TextAlign.center,
                     ),
                     SizedBox(
                       height: 20.0,

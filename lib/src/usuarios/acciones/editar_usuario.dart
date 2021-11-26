@@ -72,6 +72,10 @@ class _EditarUsuarioState extends State<EditarUsuario> {
       body: ListView.builder(
         itemCount: dataUsuario.length,
         itemBuilder: (context, index) {
+          var imagen = dataUsuario[index]['Usuario_foto'];
+          Pattern urlima =
+              r"((https?:www\.)|(https?:\/\/)|(www\.))[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9]{1,6}(\/[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)?";
+          RegExp regExp = RegExp(urlima);
           return Container(
             height: MediaQuery.of(context).size.height,
             child: Padding(
@@ -84,15 +88,22 @@ class _EditarUsuarioState extends State<EditarUsuario> {
                     height: 150,
                     child: urlIma == null
                         ? fotoi == null
-                            ? dataUsuario[index]['Usuario_foto'] != null
-                                ? FadeInImage(
+                            ? regExp.hasMatch(imagen)
+                                ? dataUsuario[index]['Usuario_foto'] != null
+                                    ? FadeInImage(
+                                        image: NetworkImage(
+                                            dataUsuario[index]['Usuario_foto']),
+                                        placeholder: AssetImage(
+                                            'assets/jar-loading.gif'),
+                                        height: 500,
+                                      )
+                                    : Image.file(fotoi)
+                                : FadeInImage(
                                     image: NetworkImage(
-                                        dataUsuario[index]['Usuario_foto']),
+                                        "http://152.173.207.169/lefufuapp/public/uploads/trabajadores/$imagen"),
                                     placeholder:
                                         AssetImage('assets/jar-loading.gif'),
-                                    height: 500,
                                   )
-                                : Image.file(fotoi)
                             : Image.asset(
                                 "assets/no-image.png",
                                 fit: BoxFit.fill,
@@ -197,7 +208,7 @@ class _EditarUsuarioState extends State<EditarUsuario> {
     var id = await FlutterSession().get('id');
 
     var url =
-        "http://152.173.217.136/pruebastesis/obtenerUsuarioeditar.php?Usuario_id=$id";
+        "http://152.173.207.169/pruebastesis/obtenerUsuarioeditar.php?Usuario_id=$id";
     final response = await http.get(Uri.parse(url));
     final datausu = jsonDecode(response.body);
     return datausu;
@@ -258,7 +269,7 @@ class _EditarUsuarioState extends State<EditarUsuario> {
     var id = await FlutterSession().get('id');
 
     var url =
-        "http://152.173.217.136/pruebastesis/editarUsuario.php?Usuario_id=$id";
+        "http://152.173.207.169/pruebastesis/editarUsuario.php?Usuario_id=$id";
     await http.post(Uri.parse(url), body: {
       'Usuario_nombre': nombreuController.text,
       'Usuario_correo': correoController.text,

@@ -13,32 +13,32 @@ class SensorModel {
   SensorModel({
     this.id,
     this.name,
-    this.SensoresMaxima,
-    this.SensoresMinima,
+    this.sensoresMaxima,
+    this.sensoresMinima,
     this.humedad,
     this.estado,
   });
 
   int id;
   String name;
-  int SensoresMaxima;
-  int SensoresMinima;
+  int sensoresMaxima;
+  int sensoresMinima;
   int humedad;
   bool estado;
 
   factory SensorModel.fromJson(Map<String, dynamic> json) => SensorModel(
         id: json["id"],
         name: json["name"],
-        SensoresMaxima: json["Sensores_maxima"],
-        SensoresMinima: json["Sensores_minima"],
+        sensoresMaxima: json["Sensores_maxima"],
+        sensoresMinima: json["Sensores_minima"],
         humedad: json["Humedad"],
         estado: json["estado"],
       );
 
-  Map<String, dynamic> toJson() => {        
+  Map<String, dynamic> toJson() => {
         "name": name,
-        "Sensores_maxima": SensoresMaxima,
-        "Sensores_minima": SensoresMinima,
+        "Sensores_maxima": sensoresMaxima,
+        "Sensores_minima": sensoresMinima,
         "Humedad": humedad,
         "estado": estado,
       };

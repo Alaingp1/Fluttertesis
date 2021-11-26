@@ -226,7 +226,7 @@ class _PublicacionState extends State<Publicacion> {
     var id = await FlutterSession().get('id');
     var cultivo = ModalRoute.of(context).settings.arguments;
     var url =
-        "http://152.173.217.136/pruebastesis/obtenerCultivoeditar.php?Usuario_id=$id&Cultivo_id=$cultivo";
+        "http://152.173.207.169/pruebastesis/obtenerCultivoeditar.php?Usuario_id=$id&Cultivo_id=$cultivo";
     final response = await http.get(Uri.parse(url));
     return jsonDecode(response.body)[0];
   }
@@ -234,7 +234,7 @@ class _PublicacionState extends State<Publicacion> {
   crearPublicacion() async {
     var id = await FlutterSession().get('id');
     var url =
-        'http://152.173.217.136/pruebastesis/crearPublicacion.php?Usuario_id=$id';
+        'http://152.173.207.169/pruebastesis/crearPublicacion.php?Usuario_id=$id';
     http.post(Uri.parse(url), body: {
       'Publicacion_nombre': nombrepController.text == null
           ? nombrepController.text.toString()

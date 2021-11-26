@@ -60,57 +60,70 @@ class _HomeState extends State<Home> {
 
           return Container(
             child: Card(
+              color: Colors.indigo,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
               child: Column(
                 children: [
                   Divider(),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Column(
-                        children: [
-                          Text(
-                            "Titulo : " + dataPub[index]['Publicacion_nombre'],
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                color: Colors.white),
-                          ),
-                          Text(
-                            "Autor : " + dataPub[index]['Usuario_nombre'],
-                            style: TextStyle(fontSize: 16, color: Colors.white),
-                          ),
-                        ],
+                      Text(
+                        "     Titulo : " + dataPub[index]['Publicacion_nombre'],
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Colors.white),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        "     Autor : " + dataPub[index]['Usuario_nombre'],
+                        style: TextStyle(fontSize: 16, color: Colors.white),
                       ),
                     ],
                   ),
                   Divider(),
                   Container(
+                    height: 350,
+                    width: 420,
                     child: dataPub[index]['Publicacion_imagen'] != null
                         ? regExp.hasMatch(imagen)
                             ? FadeInImage(
+                                fit: BoxFit.fitWidth,
                                 image: NetworkImage(
-                                    dataPub[index]['Publicacion_imagen']),
+                                  dataPub[index]['Publicacion_imagen'],
+                                ),
                                 placeholder:
                                     AssetImage('assets/jar-loading.gif'),
                               )
                             : FadeInImage(
+                                fit: BoxFit.fitWidth,
                                 image: NetworkImage(
-                                    "http://152.173.217.136/lefufuapp/public/uploads/publicaciones/$imagen"),
+                                    "http://152.173.207.169/lefufuapp/public/uploads/publicaciones/$imagen"),
                                 placeholder:
                                     AssetImage('assets/jar-loading.gif'),
                               )
                         : Image.asset(
-                            "assets/no-image.png",
-                            fit: BoxFit.fill,
+                            "assets/logo.png",
+                            height: 350,
+                            fit: BoxFit.fitWidth,
                           ),
                   ),
                   Divider(),
                   Container(
-                      child: Text(
-                    dataPub[index]['Publicacion_descripcion'],
-                    style: TextStyle(fontSize: 15, color: Colors.white),
+                      child: Container(
+                    width: 370,
+                    child: Text(
+                      dataPub[index]['Publicacion_descripcion'],
+                      style: TextStyle(fontSize: 15, color: Colors.white),
+                    ),
                   )),
-                  Divider()
+                  Divider(),
                 ],
               ),
             ),
@@ -121,7 +134,7 @@ class _HomeState extends State<Home> {
   }
 
   Future<List> verPublicaciones() async {
-    var url = "http://152.173.217.136/pruebastesis/obtenerPublicaciones.php";
+    var url = "http://152.173.207.169/pruebastesis/obtenerPublicaciones.php";
     final response = await http.get(Uri.parse(url));
     final dataPub = jsonDecode(response.body);
     return dataPub;

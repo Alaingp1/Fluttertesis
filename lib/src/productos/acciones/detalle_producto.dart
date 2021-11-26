@@ -55,7 +55,7 @@ class _DetallesProductoState extends State<DetallesProducto> {
               child: widget.lista[widget.index]['Producto_foto'] != null
                   ? FadeInImage(
                       image: NetworkImage(
-                          "http://152.173.217.136/lefufuapp/public/uploads/kits/$imagenprod"),
+                          "http://152.173.207.169/lefufuapp/public/uploads/kits/$imagenprod"),
                       placeholder: AssetImage('assets/jar-loading.gif'),
                       height: 500,
                     )
@@ -111,7 +111,7 @@ class _DetallesProductoState extends State<DetallesProducto> {
               color: Colors.purple,
               textColor: Colors.white,
               onPressed: () => Navigator.pushNamed(context, "ordenarproducto",
-                  arguments: widget.lista[widget.index]['Producto_id']),
+                  arguments: widget.lista[widget.index]),
             ),
           ],
         ),

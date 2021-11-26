@@ -87,10 +87,14 @@ class _LoginState extends State<Login> {
                 Column(
                   children: [
                     SizedBox(
-                      height: 150.0,
+                      height: 50.0,
                     ),
                     Container(
-                      height: MediaQuery.of(context).size.height / 8,
+                      height: 200,
+                      child: Center(child: Image.asset("assets/logo.png")),
+                    ),
+                    Divider(),
+                    Container(
                       child: Center(
                         child: Text(
                           'Inicia sesión',
@@ -98,6 +102,7 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                     ),
+                    Divider(),
                     TextFormField(
                         controller: _correo,
                         validator: (value) {
