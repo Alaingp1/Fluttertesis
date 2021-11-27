@@ -5,6 +5,7 @@ import 'package:flutter_session/flutter_session.dart';
 import 'package:flutter_tesisv2/src/cultivos/acciones/conectar_placa.dart';
 import 'package:flutter_tesisv2/src/cultivos/acciones/editar_cultivo.dart';
 import 'package:flutter_tesisv2/src/cultivos/cultivos.dart';
+import 'package:flutter_tesisv2/src/empresa/bottom_bar.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
@@ -50,25 +51,6 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.delete),
-            onPressed: () async {
-              var url =
-                  "http://152.173.207.169/pruebastesis/EliminarCultivo.php";
-              await http.post(Uri.parse(url), body: {
-                "Cultivo_id": widget.listaCult[widget.indexCult]['Cultivo_id']
-              });
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Cultivo()));
-            },
-          ),
-          IconButton(
-              icon: Icon(Icons.edit),
-              onPressed: () {
-                Navigator.pushNamed(context, "editarcultivo",
-                    arguments: widget.listaCult[widget.indexCult]
-                        ['Cultivo_id']);
-              }),
-          IconButton(
             icon: Icon(Icons.share),
             onPressed: () {
               Navigator.pushNamed(context, "publicacion",
@@ -86,7 +68,7 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
                 "Nombre del Cultivo:   " +
                     widget.listaCult[widget.indexCult]['Cultivo_apodo'],
                 style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
                 textAlign: TextAlign.center,
               ),
               Divider(),
@@ -94,7 +76,7 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
                 "Tipo del Cultivo:   " +
                     widget.listaCult[widget.indexCult]['Tipo_nombre'],
                 style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
                 textAlign: TextAlign.center,
               ),
               Divider(),
@@ -169,6 +151,15 @@ class _DetalleCultivoState extends State<DetalleCultivo> {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+          child: Icon(
+            Icons.edit,
+          ),
+          onPressed: () {
+            Navigator.pushNamed(context, "editarcultivo",
+                arguments: widget.listaCult[widget.indexCult]['Cultivo_id']);
+          }),
+      bottomNavigationBar: ClienteBottomBar('cultivos'),
     );
   }
 

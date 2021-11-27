@@ -125,7 +125,7 @@ class ElementoLista extends StatelessWidget {
                     color: Colors.white,
                     child: Text(
                       "Instalaciones",
-                      style: TextStyle(fontSize: 30, color: Colors.white),
+                      style: TextStyle(fontSize: 30, color: Colors.black),
                       textAlign: TextAlign.center,
                     )),
                 SizedBox(
@@ -133,7 +133,7 @@ class ElementoLista extends StatelessWidget {
                 ),
                 Text(
                   "Nombre Cliente: " "" + lista[posicion]['Usuario_nombre'],
-                  style: TextStyle(fontSize: 25, color: Colors.white),
+                  style: TextStyle(fontSize: 25, color: Colors.black),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(
@@ -142,7 +142,7 @@ class ElementoLista extends StatelessWidget {
                 Text(
                   "Direccion Cliente: " "" +
                       lista[posicion]['Usuario_direccion'],
-                  style: TextStyle(fontSize: 25, color: Colors.white),
+                  style: TextStyle(fontSize: 25, color: Colors.black),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(
@@ -150,7 +150,7 @@ class ElementoLista extends StatelessWidget {
                 ),
                 Text(
                   "Nombre Producto: " "" + lista[posicion]['Producto_nombre'],
-                  style: TextStyle(fontSize: 25, color: Colors.white),
+                  style: TextStyle(fontSize: 25, color: Colors.black),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(
@@ -159,7 +159,7 @@ class ElementoLista extends StatelessWidget {
                 Text(
                   "Cantidad Productos: " "" +
                       lista[posicion]['Orden_cantidad_productos'],
-                  style: TextStyle(fontSize: 25, color: Colors.white),
+                  style: TextStyle(fontSize: 25, color: Colors.black),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(
@@ -171,7 +171,7 @@ class ElementoLista extends StatelessWidget {
                     style: TextStyle(fontSize: 15.0),
                   ),
                   color: Colors.purple,
-                  textColor: Colors.white,
+                  textColor: Colors.black,
                   onPressed: () => Navigator.pushNamed(
                       context, "reagendarinstalacion",
                       arguments: lista[posicion]['Orden_id']),

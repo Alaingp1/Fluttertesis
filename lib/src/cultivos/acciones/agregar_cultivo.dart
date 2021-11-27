@@ -8,6 +8,7 @@ import 'package:flutter_session/flutter_session.dart';
 import 'package:flutter_tesisv2/api.dart';
 
 import 'package:flutter_tesisv2/src/cultivos/cultivos.dart';
+import 'package:flutter_tesisv2/src/empresa/bottom_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
@@ -83,6 +84,7 @@ class _AgregarCultivoState extends State<AgregarCultivo> {
               ),
               TextFormField(
                 controller: apodoController,
+                maxLength: 15,
                 decoration: InputDecoration(labelText: 'Apodo del cultivo'),
                 textInputAction: TextInputAction.next,
               ),
@@ -103,7 +105,7 @@ class _AgregarCultivoState extends State<AgregarCultivo> {
                       value: value["Tipo_id"],
                       child: Text(
                         value["Tipo_nombre"],
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: Colors.black),
                       ),
                     );
                   },
@@ -140,6 +142,7 @@ class _AgregarCultivoState extends State<AgregarCultivo> {
           ),
         ),
       ),
+      bottomNavigationBar: ClienteBottomBar('cultivos'),
     );
   }
 

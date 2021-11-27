@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_number_picker/flutter_number_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_session/flutter_session.dart';
@@ -33,10 +34,6 @@ class _OrdenarProductoState extends State<OrdenarProducto> {
   int precio = 0;
   @override
   void initState() {
-    if (cantidad != 0) {
-      precio = int.parse(producto['Producto_precio']);
-    }
-
     obtenerUsuarios().then((value) {
       datauser = value;
 
@@ -54,10 +51,14 @@ class _OrdenarProductoState extends State<OrdenarProducto> {
   @override
   Widget build(BuildContext context) {
     producto = ModalRoute.of(context).settings.arguments as Map;
+    precio = precio == 0 ? int.parse(producto['Producto_precio']) : precio;
+    String preciot =
+        NumberFormat("#,###").format(precio).toString().replaceAll(",", ".");
 
-    print(precio);
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Color.fromRGBO(0, 131, 163, 1),
+      ),
       body: Center(
         child: Container(
           padding: EdgeInsets.all(10.0),
@@ -76,12 +77,24 @@ class _OrdenarProductoState extends State<OrdenarProducto> {
                         "Verifique sus datos",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 15),
                         textAlign: TextAlign.center,
                       ),
                       SizedBox(
                         height: 30.0,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Direccion ",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontSize: 15),
+                          ),
+                        ],
                       ),
                       TextFormField(
                         controller: controlDireccion,
@@ -92,6 +105,18 @@ class _OrdenarProductoState extends State<OrdenarProducto> {
                       ),
                       SizedBox(
                         height: 30.0,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Telefono ",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontSize: 15),
+                          ),
+                        ],
                       ),
                       TextFormField(
                         controller: controlTelefono,
@@ -108,7 +133,7 @@ class _OrdenarProductoState extends State<OrdenarProducto> {
                         "Seleccione la Cantidad de Productos ",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 15),
                         textAlign: TextAlign.center,
                       ),
@@ -137,10 +162,10 @@ class _OrdenarProductoState extends State<OrdenarProducto> {
                         height: 30.0,
                       ),
                       Text(
-                        "Precio : " + precio.toString(),
+                        "Precio: \$" + preciot,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 15),
                         textAlign: TextAlign.center,
                       ),
@@ -151,7 +176,7 @@ class _OrdenarProductoState extends State<OrdenarProducto> {
                         "Seleccione la fecha para la instalacion",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 15),
                         textAlign: TextAlign.center,
                       ),
@@ -179,8 +204,16 @@ class _OrdenarProductoState extends State<OrdenarProducto> {
                         height: 25.0,
                       ),
                       datastock > 0
-                          ? ElevatedButton(
-                              child: Text("Ordenar producto"),
+                          ? FlatButton(
+                              color: Color.fromRGBO(0, 131, 163, 1),
+                              child: Text(
+                                "Ordenar producto",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                    fontSize: 15),
+                                textAlign: TextAlign.center,
+                              ),
                               onPressed: () {
                                 if (_formKey.currentState.validate()) {
                                   validarDatos();
@@ -237,8 +270,8 @@ class _OrdenarProductoState extends State<OrdenarProducto> {
     return showDatePicker(
         context: context,
         initialDate: DateTime.now(),
-        firstDate: DateTime(2020),
-        lastDate: DateTime(2022),
+        firstDate: DateTime.now(),
+        lastDate: DateTime(2100),
         builder: (context, child) {
           return Theme(data: ThemeData.dark(), child: child);
         });

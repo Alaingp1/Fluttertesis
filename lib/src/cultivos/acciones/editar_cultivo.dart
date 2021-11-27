@@ -5,6 +5,7 @@ import 'package:flutter_session/flutter_session.dart';
 import 'package:flutter_tesisv2/api.dart';
 import 'package:flutter_tesisv2/src/cultivos/acciones/detalle_cultivos.dart';
 import 'package:flutter_tesisv2/src/cultivos/cultivos.dart';
+import 'package:flutter_tesisv2/src/empresa/bottom_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
@@ -99,12 +100,13 @@ class _EditarCultivoState extends State<EditarCultivo> {
                 Text(
                   "Nombre del Cultivo",
                   style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white),
+                      fontWeight: FontWeight.bold, color: Colors.black),
                   textAlign: TextAlign.center,
                 ),
                 Container(
                   child: TextFormField(
                     controller: apodoController,
+                    maxLength: 15,
                     decoration: InputDecoration(
                         labelText: dataCult[index]['Cultivo_apodo']),
                     textInputAction: TextInputAction.next,
@@ -129,7 +131,7 @@ class _EditarCultivoState extends State<EditarCultivo> {
                         value: value["Tipo_id"],
                         child: Text(
                           value["Tipo_nombre"],
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Colors.black),
                         ),
                       );
                     },
@@ -137,7 +139,11 @@ class _EditarCultivoState extends State<EditarCultivo> {
                 ),
                 ElevatedButton(
                   onPressed: () async {
-                    if (fotoi != null && urlIma != null) {
+                    if (urlIma == null) {
+                      await editarCultivo();
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Cultivo()));
+                    } else if (urlIma != null) {
                       await editarCultivo();
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => Cultivo()));
@@ -154,6 +160,17 @@ class _EditarCultivoState extends State<EditarCultivo> {
           );
         },
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          Icons.delete,
+        ),
+        onPressed: () async {
+          await eliminarCultivo();
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Cultivo()));
+        },
+      ),
+      bottomNavigationBar: ClienteBottomBar('cultivos'),
     );
   }
 
@@ -247,13 +264,21 @@ class _EditarCultivoState extends State<EditarCultivo> {
   void editarCultivo() async {
     var id = await FlutterSession().get('id');
     var cultivo = ModalRoute.of(context).settings.arguments as String;
-
-    var url =
-        "http://152.173.207.169/pruebastesis/editarCultivo.php?Cultivo_id=$cultivo&Tipo_id=$dropdownValue";
+    var url = "http://152.173.207.169/pruebastesis/editarCultivo.php";
     http.post(Uri.parse(url), body: {
       'Cultivo_id': cultivo.toString(),
-      'Cultivo_apodo': apodoController.text,
-      'Cultivo_imagen': urlIma.toString(),
+      'Tipo_id': dropdownValue != null ? dropdownValue : dataCult[0]['Tipo_id'],
+      'Cultivo_apodo': apodoController.text.isNotEmpty
+          ? apodoController.text
+          : dataCult[0]['Cultivo_apodo'],
+      'Cultivo_imagen':
+          urlIma != null ? urlIma.toString() : dataCult[0]['Cultivo_imagen'],
     });
+  }
+
+  void eliminarCultivo() async {
+    var cultivo = ModalRoute.of(context).settings.arguments as String;
+    var url = "http://152.173.207.169/pruebastesis/EliminarCultivo.php";
+    await http.post(Uri.parse(url), body: {"Cultivo_id": cultivo});
   }
 }

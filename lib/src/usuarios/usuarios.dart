@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_tesisv2/src/usuarios/acciones/editar_usuario.dart';
 import 'package:flutter_tesisv2/src/usuarios/sidebar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -69,22 +70,39 @@ class _CuentaState extends State<Cuenta> {
                 padding: const EdgeInsets.only(left: 25, right: 25, top: 50),
                 child: Column(
                   children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                            "Bienvenido " +
+                                dataUsuario[index]['Usuario_nombre'],
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold))
+                      ],
+                    ),
                     Container(
                       width: 250,
                       height: 250,
                       child: dataUsuario[index]['Usuario_foto'] != null
-                          ? regExp.hasMatch(imagen)
-                              ? FadeInImage(
-                                  image: NetworkImage(
-                                      dataUsuario[index]['Usuario_foto']),
-                                  placeholder:
-                                      AssetImage('assets/jar-loading.gif'),
-                                )
-                              : FadeInImage(
-                                  image: NetworkImage(
-                                      "http://152.173.207.169/lefufuapp/public/uploads/trabajadores/$imagen"),
-                                  placeholder:
-                                      AssetImage('assets/jar-loading.gif'),
+                          ? dataUsuario[index]['Usuario_foto'] != "null"
+                              ? regExp.hasMatch(imagen)
+                                  ? FadeInImage(
+                                      image: NetworkImage(
+                                          dataUsuario[index]['Usuario_foto']),
+                                      placeholder:
+                                          AssetImage('assets/jar-loading.gif'),
+                                    )
+                                  : FadeInImage(
+                                      image: NetworkImage(
+                                          "http://152.173.207.169/lefufuapp/public/uploads/trabajadores/$imagen"),
+                                      placeholder:
+                                          AssetImage('assets/jar-loading.gif'),
+                                    )
+                              : Image.asset(
+                                  "assets/no-image.png",
+                                  fit: BoxFit.fill,
                                 )
                           : Image.asset(
                               "assets/no-image.png",
@@ -94,38 +112,74 @@ class _CuentaState extends State<Cuenta> {
                     SizedBox(
                       height: 30.0,
                     ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text("Nombre ",
+                            style: TextStyle(fontSize: 15, color: Colors.black))
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
                     Container(
                         child: Text(
-                      "Nombre del Usuario: " +
-                          dataUsuario[index]['Usuario_nombre'],
-                      style: TextStyle(fontSize: 20, color: Colors.white),
+                      dataUsuario[index]['Usuario_nombre'],
+                      style: TextStyle(fontSize: 20, color: Colors.black),
                     )),
                     SizedBox(
                       height: 30.0,
                     ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text("Correo ",
+                            style: TextStyle(fontSize: 15, color: Colors.black))
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
                     Container(
                         child: Text(
-                      "Correo del Usuario: " +
-                          dataUsuario[index]['Usuario_correo'],
-                      style: TextStyle(fontSize: 17, color: Colors.white),
+                      dataUsuario[index]['Usuario_correo'],
+                      style: TextStyle(fontSize: 20, color: Colors.black),
                     )),
                     SizedBox(
                       height: 30.0,
                     ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text("Telefono ",
+                            style: TextStyle(fontSize: 15, color: Colors.black))
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
                     Container(
                         child: Text(
-                      "direccion del Usuario: " +
-                          dataUsuario[index]['Usuario_direccion'],
-                      style: TextStyle(fontSize: 20, color: Colors.white),
+                      dataUsuario[index]['Usuario_telefono'],
+                      style: TextStyle(fontSize: 20, color: Colors.black),
                     )),
                     SizedBox(
                       height: 30.0,
                     ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text("Direccion ",
+                            style: TextStyle(fontSize: 15, color: Colors.black))
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
                     Container(
                         child: Text(
-                      "Telefono del Usuario: " +
-                          dataUsuario[index]['Usuario_telefono'],
-                      style: TextStyle(fontSize: 20, color: Colors.white),
+                      dataUsuario[index]['Usuario_direccion'],
+                      style: TextStyle(fontSize: 20, color: Colors.black),
                     )),
                   ],
                 ),

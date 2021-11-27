@@ -5,6 +5,7 @@ import 'package:flutter_tesisv2/src/productos/acciones/ordenar_producto.dart';
 import 'package:flutter_tesisv2/src/usuarios/sidebar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 
 class DetallesProducto extends StatefulWidget {
   static const String ROUTE = "/detallesproducto";
@@ -24,9 +25,13 @@ class _DetallesProductoState extends State<DetallesProducto> {
   @override
   Widget build(BuildContext context) {
     var imagenprod = widget.lista[widget.index]['Producto_foto'];
+    int precio = int.parse(widget.lista[widget.index]['Producto_precio']);
+    String preciof =
+        NumberFormat("#,###").format(precio).toString().replaceAll(",", ".");
     return Scaffold(
       drawer: NavDrawer(),
       appBar: AppBar(
+        backgroundColor: Color.fromRGBO(0, 131, 163, 1),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
@@ -71,7 +76,7 @@ class _DetallesProductoState extends State<DetallesProducto> {
               widget.lista[widget.index]['Categoria_nombre'],
               style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: Colors.black,
                   fontSize: 15),
               textAlign: TextAlign.center,
             ),
@@ -79,7 +84,8 @@ class _DetallesProductoState extends State<DetallesProducto> {
               height: 25.0,
             ),
             Text(
-              "Stock:   " + widget.lista[widget.index]['Producto_stock'],
+              "Descripcion:   " +
+                  widget.lista[widget.index]['Producto_descripcion'],
               style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               textAlign: TextAlign.center,
             ),
@@ -87,7 +93,7 @@ class _DetallesProductoState extends State<DetallesProducto> {
               height: 25,
             ),
             Text(
-              "Precio:  \$ " + widget.lista[widget.index]['Producto_precio'],
+              "Stock:   " + widget.lista[widget.index]['Producto_stock'],
               style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               textAlign: TextAlign.center,
             ),
@@ -95,8 +101,7 @@ class _DetallesProductoState extends State<DetallesProducto> {
               height: 15,
             ),
             Text(
-              "Descripcion:   " +
-                  widget.lista[widget.index]['Producto_descripcion'],
+              "Precio:  \$ " + preciof,
               style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               textAlign: TextAlign.center,
             ),
@@ -108,7 +113,7 @@ class _DetallesProductoState extends State<DetallesProducto> {
                 'Ordenar Producto',
                 style: TextStyle(fontSize: 15.0),
               ),
-              color: Colors.purple,
+              color: Color.fromRGBO(0, 131, 163, 1),
               textColor: Colors.white,
               onPressed: () => Navigator.pushNamed(context, "ordenarproducto",
                   arguments: widget.lista[widget.index]),

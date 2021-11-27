@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 
 class Productos extends StatefulWidget {
   static const String ROUTE = "/productos";
@@ -70,8 +71,10 @@ class _ProductosState extends State<Productos> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(0, 165, 207, 1),
       drawer: NavDrawer(),
       appBar: AppBar(
+        backgroundColor: Color.fromRGBO(0, 131, 163, 1),
         title: TextField(
           controller: filtron,
           decoration: InputDecoration(hintText: "buscar producto"),
@@ -123,15 +126,21 @@ class _ProductosState extends State<Productos> {
                       },
                     ).toList(),
                   ),
-                  ElevatedButton(
-                      onPressed: () {
-                        dropdownValue = null;
-                        verProductos().then((value) {
-                          dataProd = value;
-                          setState(() {});
-                        });
-                      },
-                      child: Text("quitar filtro")),
+                  FlatButton(
+                    color: Colors.white,
+                    onPressed: () {
+                      dropdownValue = null;
+                      verProductos().then((value) {
+                        dataProd = value;
+                        setState(() {});
+                      });
+                    },
+                    child: Text(
+                      "quitar filtro",
+                      style: TextStyle(color: Colors.black),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
                   Divider()
                 ],
               ),
@@ -141,6 +150,11 @@ class _ProductosState extends State<Productos> {
                 itemCount: dataProd.length,
                 itemBuilder: (context, index) {
                   var imagenprod = dataProd[index]['Producto_foto'];
+                  int precio = int.parse(dataProd[index]['Producto_precio']);
+                  String preciof = NumberFormat("#,###")
+                      .format(precio)
+                      .toString()
+                      .replaceAll(",", ".");
                   return GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
@@ -151,7 +165,8 @@ class _ProductosState extends State<Productos> {
                       ));
                     },
                     child: Card(
-                      color: Colors.indigo,
+                      margin: EdgeInsets.all(10),
+                      color: Color.fromRGBO(240, 248, 255, 1),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)),
                       child: Column(
@@ -160,16 +175,15 @@ class _ProductosState extends State<Productos> {
                             height: 25.0,
                           ),
                           Container(
-                            width: 250,
-                            height: 250,
+                            padding: EdgeInsets.all(20),
                             child: dataProd[index]['Producto_foto'] != null ||
                                     dataProd[index]['Producto_foto'] == ""
                                 ? FadeInImage(
+                                    fit: BoxFit.fill,
                                     image: NetworkImage(
                                         "http://152.173.207.169/lefufuapp/public/uploads/kits/$imagenprod"),
                                     placeholder:
                                         AssetImage('assets/jar-loading.gif'),
-                                    height: 500,
                                   )
                                 : Image.asset(
                                     "assets/no-image.png",
@@ -180,15 +194,15 @@ class _ProductosState extends State<Productos> {
                             dataProd[index]['Producto_nombre'],
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: Colors.white),
+                                color: Colors.black),
                             textAlign: TextAlign.center,
                           ),
                           Divider(),
                           Text(
-                            "precio \$" + dataProd[index]['Producto_precio'],
+                            "Precio: \$" + preciof,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: Colors.white),
+                                color: Colors.black),
                             textAlign: TextAlign.center,
                           ),
                           Divider(),

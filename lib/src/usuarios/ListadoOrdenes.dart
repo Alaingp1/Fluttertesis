@@ -29,6 +29,7 @@ class _ListadoOrdenesState extends State<ListadoOrdenes> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromRGBO(0, 131, 163, 1),
         automaticallyImplyLeading: false,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
@@ -66,14 +67,16 @@ class ElementoLista extends StatelessWidget {
       itemCount: lista == null ? 0 : lista.length,
       itemBuilder: (context, posicion) {
         return Container(
-          padding: EdgeInsets.all(2.0),
+          margin: EdgeInsets.all(10.0),
           child: GestureDetector(
             onTap: () => Navigator.pushNamed(context, "ordenDetalle",
                 arguments: lista[posicion]['Orden_id']),
             child: Card(
-              color: Colors.purple[800],
+              color: Color.fromRGBO(0, 165, 207, 1),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
               child: Container(
-                padding: EdgeInsets.all(10.0),
+                padding: EdgeInsets.all(20.0),
                 child: Column(
                   children: [
                     SizedBox(
@@ -81,16 +84,7 @@ class ElementoLista extends StatelessWidget {
                     ),
                     Text(
                       "Nombre: " "" + lista[posicion]['Producto_nombre'],
-                      style: TextStyle(fontSize: 15, color: Colors.white),
-                    ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    Text(
-                      "Fecha de instalacion: " "" +
-                          lista[posicion]['Orden_Fecha'],
-                      style: TextStyle(fontSize: 15, color: Colors.white),
-                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 15, color: Colors.black),
                     ),
                     SizedBox(
                       height: 20.0,
@@ -98,7 +92,15 @@ class ElementoLista extends StatelessWidget {
                     Text(
                       "Cantidad: " "" +
                           lista[posicion]['Orden_cantidad_productos'],
-                      style: TextStyle(fontSize: 15, color: Colors.white),
+                      style: TextStyle(fontSize: 15, color: Colors.black),
+                    ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    Text(
+                      lista[posicion]['Detalle_fecha'],
+                      style: TextStyle(fontSize: 15, color: Colors.black),
+                      textAlign: TextAlign.center,
                     ),
                     SizedBox(
                       height: 20.0,

@@ -82,6 +82,7 @@ class _RegistroState extends State<Registro> {
                         textInputAction: TextInputAction.next,
                         onEditingComplete: () => node.nextFocus()),
                     TextFormField(
+                        maxLength: 8,
                         controller: passwordController,
                         keyboardType: TextInputType.visiblePassword,
                         decoration: InputDecoration(labelText: 'Contraseña'),
@@ -108,6 +109,7 @@ class _RegistroState extends State<Registro> {
                         textInputAction: TextInputAction.done,
                         onFieldSubmitted: (_) => node.nextFocus()),
                     TextFormField(
+                        maxLength: 8,
                         controller: passwordcController,
                         keyboardType: TextInputType.visiblePassword,
                         decoration:
@@ -135,6 +137,7 @@ class _RegistroState extends State<Registro> {
                         textInputAction: TextInputAction.done,
                         onFieldSubmitted: (_) => node.unfocus()),
                     TextFormField(
+                        maxLength: 100,
                         controller: direccionController,
                         decoration: InputDecoration(labelText: 'Direccion'),
                         validator: (value) {

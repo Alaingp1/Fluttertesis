@@ -65,55 +65,55 @@ class ElementoLista extends StatelessWidget {
                   height: 15,
                 ),
                 Title(
-                    color: Colors.white,
+                    color: Colors.black,
                     child: Text(
                       "IndoStatus",
-                      style: TextStyle(fontSize: 20, color: Colors.white),
+                      style: TextStyle(fontSize: 20, color: Colors.black),
                       textAlign: TextAlign.center,
                     )),
                 SizedBox(
                   height: 40.0,
                 ),
                 Title(
-                    color: Colors.white,
+                    color: Colors.black,
                     child: Text(
                       "mision",
-                      style: TextStyle(fontSize: 15, color: Colors.white),
+                      style: TextStyle(fontSize: 15, color: Colors.black),
                       textAlign: TextAlign.center,
                     )),
                 Text(
                   lista[posicion]['Datos_mision'],
-                  style: TextStyle(fontSize: 15, color: Colors.white),
+                  style: TextStyle(fontSize: 15, color: Colors.black),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(
                   height: 25.0,
                 ),
                 Title(
-                    color: Colors.white,
+                    color: Colors.black,
                     child: Text(
                       "Vision",
-                      style: TextStyle(fontSize: 15, color: Colors.white),
+                      style: TextStyle(fontSize: 15, color: Colors.black),
                       textAlign: TextAlign.center,
                     )),
                 Text(
                   lista[posicion]['Datos_vision'],
-                  style: TextStyle(fontSize: 15, color: Colors.white),
+                  style: TextStyle(fontSize: 15, color: Colors.black),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(
                   height: 25.0,
                 ),
                 Title(
-                    color: Colors.white,
+                    color: Colors.black,
                     child: Text(
-                      "Nosotros",
-                      style: TextStyle(fontSize: 15, color: Colors.white),
+                      "Quienes Somos",
+                      style: TextStyle(fontSize: 15, color: Colors.black),
                       textAlign: TextAlign.center,
                     )),
                 Text(
                   lista[posicion]['Datos_comentario'],
-                  style: TextStyle(fontSize: 15, color: Colors.white),
+                  style: TextStyle(fontSize: 15, color: Colors.black),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(

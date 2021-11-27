@@ -59,7 +59,7 @@ class ElementoLista extends StatelessWidget {
         return new Container(
           padding: EdgeInsets.all(2.0),
           child: new Card(
-            color: Colors.purpleAccent,
+            color: Color.fromRGBO(0, 165, 207, 1),
             child: Container(
               padding: EdgeInsets.all(10.0),
               child: Column(

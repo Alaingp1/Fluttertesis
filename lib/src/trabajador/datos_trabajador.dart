@@ -111,7 +111,7 @@ class ElementoLista extends StatelessWidget {
                     leading: Icon(Icons.person),
                     title: Text(
                       "Nombre: " "" + lista[posicion]['Usuario_nombre'],
-                      style: TextStyle(fontSize: 15, color: Colors.white),
+                      style: TextStyle(fontSize: 15, color: Colors.black),
                     )),
                 SizedBox(
                   height: 10.0,
@@ -120,7 +120,7 @@ class ElementoLista extends StatelessWidget {
                     leading: Icon(Icons.email),
                     title: Text(
                       "Correo: " "" + lista[posicion]['Usuario_correo'],
-                      style: TextStyle(fontSize: 15, color: Colors.white),
+                      style: TextStyle(fontSize: 15, color: Colors.black),
                     )),
                 SizedBox(
                   height: 10.0,
@@ -129,7 +129,7 @@ class ElementoLista extends StatelessWidget {
                     leading: Icon(Icons.location_on),
                     title: Text(
                       "Direccion: " "" + lista[posicion]['Usuario_direccion'],
-                      style: TextStyle(fontSize: 15, color: Colors.white),
+                      style: TextStyle(fontSize: 15, color: Colors.black),
                     )),
                 SizedBox(
                   height: 10.0,
@@ -138,7 +138,7 @@ class ElementoLista extends StatelessWidget {
                     leading: Icon(Icons.phone),
                     title: Text(
                       "Telefono: " "" + lista[posicion]['Usuario_telefono'],
-                      style: TextStyle(fontSize: 15, color: Colors.white),
+                      style: TextStyle(fontSize: 15, color: Colors.black),
                     )),
                 SizedBox(
                   height: 10.0,

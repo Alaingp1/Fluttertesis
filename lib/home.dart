@@ -39,8 +39,10 @@ class _HomeState extends State<Home> {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
+      backgroundColor: Color.fromRGBO(0, 165, 207, 1),
       drawer: NavDrawer(),
       appBar: AppBar(
+        backgroundColor: Color.fromRGBO(0, 131, 163, 1),
         actions: [
           IconButton(
               onPressed: () {
@@ -59,8 +61,9 @@ class _HomeState extends State<Home> {
           RegExp regExp = RegExp(urlima);
 
           return Container(
+            margin: EdgeInsets.all(8),
             child: Card(
-              color: Colors.indigo,
+              color: Color.fromRGBO(240, 248, 255, 1),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20)),
               child: Column(
@@ -74,7 +77,7 @@ class _HomeState extends State<Home> {
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
-                            color: Colors.white),
+                            color: Colors.black),
                       ),
                     ],
                   ),
@@ -83,14 +86,13 @@ class _HomeState extends State<Home> {
                     children: [
                       Text(
                         "     Autor : " + dataPub[index]['Usuario_nombre'],
-                        style: TextStyle(fontSize: 16, color: Colors.white),
+                        style: TextStyle(fontSize: 16, color: Colors.black),
                       ),
                     ],
                   ),
                   Divider(),
                   Container(
-                    height: 350,
-                    width: 420,
+                    padding: EdgeInsets.all(20),
                     child: dataPub[index]['Publicacion_imagen'] != null
                         ? regExp.hasMatch(imagen)
                             ? FadeInImage(
@@ -109,7 +111,7 @@ class _HomeState extends State<Home> {
                                     AssetImage('assets/jar-loading.gif'),
                               )
                         : Image.asset(
-                            "assets/logo.png",
+                            "assets/logo_fondo.png",
                             height: 350,
                             fit: BoxFit.fitWidth,
                           ),
@@ -120,7 +122,7 @@ class _HomeState extends State<Home> {
                     width: 370,
                     child: Text(
                       dataPub[index]['Publicacion_descripcion'],
-                      style: TextStyle(fontSize: 15, color: Colors.white),
+                      style: TextStyle(fontSize: 15, color: Colors.black),
                     ),
                   )),
                   Divider(),

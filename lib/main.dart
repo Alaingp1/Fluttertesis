@@ -28,7 +28,7 @@ import 'package:flutter_tesisv2/src/usuarios/usuarios.dart';
 import 'src/cultivos/acciones/conectar_placa.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();  
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());
 }
@@ -40,9 +40,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         bottomAppBarColor: Colors.white,
-        brightness: Brightness.dark,
-        primaryColor: Colors.deepPurple,
-        primarySwatch: Colors.deepPurple,
+        brightness: Brightness.light,
+        primaryColor: Color.fromRGBO(0, 165, 207, 1),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       darkTheme: ThemeData.dark(),
